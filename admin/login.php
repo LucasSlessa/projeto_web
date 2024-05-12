@@ -1,21 +1,20 @@
 <?php
-
 include '../components/connect.php';
 
 if(isset($_POST['submit'])){
 
    $email = $_POST['email'];
    $email = filter_var($email, FILTER_SANITIZE_STRING);
-   $pass = sha1($_POST['pass']);
-   $pass = filter_var($pass, FILTER_SANITIZE_STRING);
+   $pass = $_POST['pass'];
 
-   $select_tutor = $conn->prepare("SELECT * FROM `tutors` WHERE email = ? AND password = ? LIMIT 1");
-   $select_tutor->execute([$email, $pass]);
+   $select_tutor = $conn->prepare("SELECT * FROM `tutors` WHERE email = ? LIMIT 1");
+   $select_tutor->execute([$email]);
    $row = $select_tutor->fetch(PDO::FETCH_ASSOC);
    
-   if($select_tutor->rowCount() > 0){
+   if($select_tutor->rowCount() > 0 && password_verify($pass, $row['password'])){
      setcookie('tutor_id', $row['id'], time() + 60*60*24*30, '/');
      header('location:dashboard.php');
+     exit; // Adicionando exit para garantir que o script seja interrompido após o redirecionamento
    }else{
       $message[] = 'incorrect email or password!';
    }
@@ -71,42 +70,5 @@ if(isset($message)){
 </section>
 
 <!-- registe section ends -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-
-let darkMode = localStorage.getItem('dark-mode');
-let body = document.body;
-
-const enabelDarkMode = () =>{
-   body.classList.add('dark');
-   localStorage.setItem('dark-mode', 'enabled');
-}
-
-const disableDarkMode = () =>{
-   body.classList.remove('dark');
-   localStorage.setItem('dark-mode', 'disabled');
-}
-
-if(darkMode === 'enabled'){
-   enabelDarkMode();
-}else{
-   disableDarkMode();
-}
-
-</script>
-   
 </body>
 </html>

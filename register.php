@@ -1,59 +1,48 @@
 <?php
-
 include 'components/connect.php';
 
-if(isset($_COOKIE['user_id'])){
+if (isset($_COOKIE['user_id'])) {
    $user_id = $_COOKIE['user_id'];
-}else{
+} else {
    $user_id = '';
 }
 
-if(isset($_POST['submit'])){
-
+if (isset($_POST['submit'])) {
    $id = unique_id();
    $name = $_POST['name'];
    $email = $_POST['email'];
    $pass = password_hash($_POST['pass'], PASSWORD_DEFAULT); // Usando password_hash para criptografar a senha
-   $cpass = password_hash($_POST['cpass'], PASSWORD_DEFAULT); // Usando password_hash para criptografar a senha
    
    // Renomeando o arquivo de imagem para evitar possíveis problemas de segurança
    $image = $_FILES['image']['name'];
    $ext = pathinfo($image, PATHINFO_EXTENSION);
-   $rename = unique_id().'.'.$ext;
+   $rename = unique_id() . '.' . $ext;
    
    $image_size = $_FILES['image']['size'];
    $image_tmp_name = $_FILES['image']['tmp_name'];
-   $image_folder = 'uploaded_files/'.$rename;
+   $image_folder = 'uploaded_files/' . $rename;
    
    $select_user = $conn->prepare("SELECT * FROM `users` WHERE email = ?");
    $select_user->execute([$email]);
    
-   
-   if($select_user->rowCount() > 0){
+   if ($select_user->rowCount() > 0) {
       $message[] = 'email already taken!';
-   }else{
-      if($pass != $cpass){
-         $message[] = 'confirm passowrd not matched!';
-      }else{
+   } else {
+      if ($_POST['pass'] != $_POST['cpass']) {
+         $message[] = 'confirm password not matched!';
+      } else {
          $insert_user = $conn->prepare("INSERT INTO `users`(id, name, email, password, image) VALUES(?,?,?,?,?)");
-         $insert_user->execute([$id, $name, $email, $cpass, $rename]);
+         $insert_user->execute([$id, $name, $email, $pass, $rename]);
          move_uploaded_file($image_tmp_name, $image_folder);
          
-         $verify_user = $conn->prepare("SELECT * FROM `users` WHERE email = ? AND password = ? LIMIT 1");
-         $verify_user->execute([$email, $pass]);
-         $row = $verify_user->fetch(PDO::FETCH_ASSOC);
-         
-         if($verify_user->rowCount() > 0){
-            setcookie('user_id', $row['id'], time() + 60*60*24*30, '/');
-            header('location:home.php');
-            exit; // Adicionando exit para garantir que o script seja interrompido após a redirecionamento
-         }
+         // Redirect to login page after successful registration
+         header('location: login.php');
+         exit; // Adicionando exit para garantir que o script seja interrompido após o redirecionamento
       }
    }
-
 }
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -83,7 +72,7 @@ if(isset($_POST['submit'])){
             <p>your name <span>*</span></p>
             <input type="text" name="name" placeholder="enter your name" maxlength="50" required class="box">
             <p>your email <span>*</span></p>
-            <input type="email" name="email" placeholder="enter your email" maxlength="20" required class="box">
+            <input type="email" name="email" placeholder="enter your email" maxlength="50" required class="box">
          </div>
          <div class="col">
             <p>your password <span>*</span></p>

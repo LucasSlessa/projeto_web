@@ -1,5 +1,4 @@
 <?php
-
 include '../components/connect.php';
 
 if(isset($_POST['submit'])){
@@ -11,33 +10,19 @@ if(isset($_POST['submit'])){
    $profession = filter_var($profession, FILTER_SANITIZE_STRING);
    $email = $_POST['email'];
    $email = filter_var($email, FILTER_SANITIZE_STRING);
-   $pass = sha1($_POST['pass']);
-   $pass = filter_var($pass, FILTER_SANITIZE_STRING);
-   $cpass = sha1($_POST['cpass']);
-   $cpass = filter_var($cpass, FILTER_SANITIZE_STRING);
+   $pass = $_POST['pass'];
+   $cpass = $_POST['cpass'];
 
-   $image = $_FILES['image']['name'];
-   $image = filter_var($image, FILTER_SANITIZE_STRING);
-   $ext = pathinfo($image, PATHINFO_EXTENSION);
-   $rename = unique_id().'.'.$ext;
-   $image_size = $_FILES['image']['size'];
-   $image_tmp_name = $_FILES['image']['tmp_name'];
-   $image_folder = '../uploaded_files/'.$rename;
-
-   $select_tutor = $conn->prepare("SELECT * FROM `tutors` WHERE email = ?");
-   $select_tutor->execute([$email]);
-   
-   if($select_tutor->rowCount() > 0){
-      $message[] = 'email already taken!';
+   // Verificar se as senhas coincidem
+   if($pass != $cpass){
+      $message[] = 'confirm passowrd not matched!';
    }else{
-      if($pass != $cpass){
-         $message[] = 'confirm passowrd not matched!';
-      }else{
-         $insert_tutor = $conn->prepare("INSERT INTO `tutors`(id, name, profession, email, password, image) VALUES(?,?,?,?,?,?)");
-         $insert_tutor->execute([$id, $name, $profession, $email, $cpass, $rename]);
-         move_uploaded_file($image_tmp_name, $image_folder);
-         $message[] = 'new tutor registered! please login now';
-      }
+      // Criptografar a senha usando password_hash
+      $passHash = password_hash($pass, PASSWORD_DEFAULT);
+
+      $insert_tutor = $conn->prepare("INSERT INTO `tutors`(id, name, profession, email, password) VALUES(?,?,?,?,?)");
+      $insert_tutor->execute([$id, $name, $profession, $email, $passHash]);
+      $message[] = 'new tutor registered! please login now';
    }
 
 }
@@ -100,7 +85,7 @@ if(isset($message)){
                <option value="photographer">photographer</option>
             </select>
             <p>your email <span>*</span></p>
-            <input type="email" name="email" placeholder="enter your email" maxlength="20" required class="box">
+            <input type="email" name="email" placeholder="enter your email" maxlength="50" required class="box">
          </div>
          <div class="col">
             <p>your password <span>*</span></p>
@@ -118,40 +103,5 @@ if(isset($message)){
 </section>
 
 <!-- registe section ends -->
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-
-let darkMode = localStorage.getItem('dark-mode');
-let body = document.body;
-
-const enabelDarkMode = () =>{
-   body.classList.add('dark');
-   localStorage.setItem('dark-mode', 'enabled');
-}
-
-const disableDarkMode = () =>{
-   body.classList.remove('dark');
-   localStorage.setItem('dark-mode', 'disabled');
-}
-
-if(darkMode === 'enabled'){
-   enabelDarkMode();
-}else{
-   disableDarkMode();
-}
-
-</script>
-   
 </body>
 </html>

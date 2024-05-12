@@ -1,34 +1,42 @@
 <?php
-
 include 'components/connect.php';
 
-if(isset($_COOKIE['user_id'])){
+if (isset($_COOKIE['user_id'])) {
    $user_id = $_COOKIE['user_id'];
-}else{
+} else {
    $user_id = '';
 }
 
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
 
    $email = $_POST['email'];
    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-   $pass = sha1($_POST['pass']);
+   $password = $_POST['pass'];
 
-
-   $select_user = $conn->prepare("SELECT * FROM `users` WHERE email = ? AND password = ? LIMIT 1");
-   $select_user->execute([$email, $pass]);
+   $select_user = $conn->prepare("SELECT * FROM `users` WHERE email = ? LIMIT 1");
+   $select_user->execute([$email]);
    $row = $select_user->fetch(PDO::FETCH_ASSOC);
    
-   if($select_user->rowCount() > 0){
-     setcookie('user_id', $row['id'], time() + 60*60*24*30, '/');
-     header('location:home.php');
-   }else{
+   if ($select_user->rowCount() > 0 && password_verify($password, $row['password'])) {
+      setcookie('user_id', $row['id'], time() + 60*60*24*30, '/');
+      header('location: home.php');
+      exit; // Adicionando exit para garantir que o script seja interrompido após o redirecionamento
+   } else {
       $message[] = 'incorrect email or password!';
    }
 
-}
+   $hash = '$2y$10$pipFbazTB3XSqxh.1YhmCuh.BnemEE03WBPndLSDru.';
+      $senha_correta = 123; // substitua pela senha correta
 
+      if (password_verify($senha_correta, $hash)) {
+         echo 'A senha está correta!';
+      } else {
+         echo 'Senha incorreta!';
+      }
+
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -62,17 +70,6 @@ if(isset($_POST['submit'])){
    </form>
 
 </section>
-
-
-
-
-
-
-
-
-
-
-
 
 <?php include 'components/footer.php'; ?>
 
