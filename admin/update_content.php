@@ -19,15 +19,15 @@ if(isset($_GET['get_id'])){
 if(isset($_POST['update'])){
 
    $video_id = $_POST['video_id'];
-   $video_id = filter_var($video_id, FILTER_SANITIZE_STRING);
+   $video_id = filter_var($video_id, FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
    $status = $_POST['status'];
-   $status = filter_var($status, FILTER_SANITIZE_STRING);
+   $status = filter_var($status, FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
    $title = $_POST['title'];
-   $title = filter_var($title, FILTER_SANITIZE_STRING);
+   $title = filter_var($title, FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
    $description = $_POST['description'];
-   $description = filter_var($description, FILTER_SANITIZE_STRING);
+   $description = filter_var($description, FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
    $playlist = $_POST['playlist'];
-   $playlist = filter_var($playlist, FILTER_SANITIZE_STRING);
+   $playlist = filter_var($playlist, FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
 
    $update_content = $conn->prepare("UPDATE `content` SET title = ?, description = ?, status = ? WHERE id = ?");
    $update_content->execute([$title, $description, $status, $video_id]);
@@ -38,9 +38,9 @@ if(isset($_POST['update'])){
    }
 
    $old_thumb = $_POST['old_thumb'];
-   $old_thumb = filter_var($old_thumb, FILTER_SANITIZE_STRING);
+   $old_thumb = filter_var($old_thumb, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
    $thumb = $_FILES['thumb']['name'];
-   $thumb = filter_var($thumb, FILTER_SANITIZE_STRING);
+   $thumb = filter_var($thumb, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
    $thumb_ext = pathinfo($thumb, PATHINFO_EXTENSION);
    $rename_thumb = unique_id().'.'.$thumb_ext;
    $thumb_size = $_FILES['thumb']['size'];
@@ -61,9 +61,9 @@ if(isset($_POST['update'])){
    }
 
    $old_video = $_POST['old_video'];
-   $old_video = filter_var($old_video, FILTER_SANITIZE_STRING);
+   $old_video = filter_var($old_video, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
    $video = $_FILES['video']['name'];
-   $video = filter_var($video, FILTER_SANITIZE_STRING);
+   $video = filter_var($video, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
    $video_ext = pathinfo($video, PATHINFO_EXTENSION);
    $rename_video = unique_id().'.'.$video_ext;
    $video_tmp_name = $_FILES['video']['tmp_name'];
@@ -85,7 +85,7 @@ if(isset($_POST['update'])){
 if(isset($_POST['delete_video'])){
 
    $delete_id = $_POST['video_id'];
-   $delete_id = filter_var($delete_id, FILTER_SANITIZE_STRING);
+   $delete_id = filter_var($delete_id, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
    $delete_video_thumb = $conn->prepare("SELECT thumb FROM `content` WHERE id = ? LIMIT 1");
    $delete_video_thumb->execute([$delete_id]);
