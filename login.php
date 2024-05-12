@@ -25,15 +25,7 @@ if (isset($_POST['submit'])) {
       $message[] = 'incorrect email or password!';
    }
 
-   $hash = '$2y$10$pipFbazTB3XSqxh.1YhmCuh.BnemEE03WBPndLSDru.';
-      $senha_correta = 123; // substitua pela senha correta
-
-      if (password_verify($senha_correta, $hash)) {
-         echo 'A senha está correta!';
-      } else {
-         echo 'Senha incorreta!';
-      }
-
+  
 }
 ?>
 

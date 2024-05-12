@@ -5,11 +5,11 @@ if(isset($_POST['submit'])){
 
    $id = unique_id();
    $name = $_POST['name'];
-   $name = filter_var($name, FILTER_SANITIZE_STRING);
+   $name = filter_var($name, FILTER_SANITIZE_SPECIAL_CHARS);
    $profession = $_POST['profession'];
-   $profession = filter_var($profession, FILTER_SANITIZE_STRING);
+   $profession = filter_var($profession, FILTER_SANITIZE_SPECIAL_CHARS);
    $email = $_POST['email'];
-   $email = filter_var($email, FILTER_SANITIZE_STRING);
+   $email = filter_var($email, FILTER_SANITIZE_EMAIL);
    $pass = $_POST['pass'];
    $cpass = $_POST['cpass'];
 
@@ -28,6 +28,8 @@ if(isset($_POST['submit'])){
 }
 
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
