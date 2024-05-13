@@ -11,7 +11,7 @@ if(isset($_COOKIE['user_id'])){
 if(isset($_POST['tutor_fetch'])){
 
    $tutor_email = $_POST['tutor_email'];
-   $tutor_email = filter_var($tutor_email, FILTER_SANITIZE_STRING);
+   $tutor_email = filter_var($tutor_email, FILTER_SANITIZE_EMAIL);
    $select_tutor = $conn->prepare('SELECT * FROM `tutors` WHERE email = ?');
    $select_tutor->execute([$tutor_email]);
 

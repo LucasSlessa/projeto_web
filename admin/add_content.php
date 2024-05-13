@@ -10,19 +10,14 @@ if(isset($_COOKIE['tutor_id'])){
 }
 
 if(isset($_POST['submit'])){
-
    $id = unique_id();
-   $status = $_POST['status'];
-   $status = filter_var($status, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-   $title = $_POST['title'];
-   $title = filter_var($title, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-   $description = $_POST['description'];
-   $description = filter_var($description, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-   $playlist = $_POST['playlist'];
-   $playlist = filter_var($playlist, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+   $status = filter_var($_POST['status'], FILTER_SANITIZE_SPECIAL_CHARS);
+   $title = filter_var($_POST['title'], FILTER_SANITIZE_SPECIAL_CHARS);
+   $description = filter_var($_POST['description'], FILTER_SANITIZE_SPECIAL_CHARS);
+   $playlist = filter_var($_POST['playlist'], FILTER_SANITIZE_SPECIAL_CHARS);
 
    $thumb = $_FILES['thumb']['name'];
-   $thumb = filter_var($thumb, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+   $thumb = filter_var($thumb, FILTER_SANITIZE_SPECIAL_CHARS);
    $thumb_ext = pathinfo($thumb, PATHINFO_EXTENSION);
    $rename_thumb = unique_id().'.'.$thumb_ext;
    $thumb_size = $_FILES['thumb']['size'];
@@ -30,7 +25,7 @@ if(isset($_POST['submit'])){
    $thumb_folder = '../uploaded_files/'.$rename_thumb;
 
    $video = $_FILES['video']['name'];
-   $video = filter_var($video, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+   $video = filter_var($video, FILTER_SANITIZE_SPECIAL_CHARS);
    $video_ext = pathinfo($video, PATHINFO_EXTENSION);
    $rename_video = unique_id().'.'.$video_ext;
    $video_tmp_name = $_FILES['video']['tmp_name'];
@@ -46,11 +41,10 @@ if(isset($_POST['submit'])){
       $message[] = 'new course uploaded!';
    }
 
-   
-
 }
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

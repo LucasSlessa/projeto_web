@@ -7,36 +7,30 @@ if(isset($_COOKIE['tutor_id'])){
 }else{
    $tutor_id = '';
    header('location:login.php');
+   exit; // Stop further execution
 }
 
 if(isset($_POST['submit'])){
-
    $id = unique_id();
-   $title = $_POST['title'];
-   $title = filter_var($title, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-   $description = $_POST['description'];
-   $description = filter_var($description, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-   $status = $_POST['status'];
-   $status = filter_var($status, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+   $title = filter_var($_POST['title'], FILTER_SANITIZE_SPECIAL_CHARS);
+   $description = filter_var($_POST['description'], FILTER_SANITIZE_SPECIAL_CHARS);
+   $status = filter_var($_POST['status'], FILTER_SANITIZE_SPECIAL_CHARS);
 
    $image = $_FILES['image']['name'];
-   $image = filter_var($image, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
    $ext = pathinfo($image, PATHINFO_EXTENSION);
    $rename = unique_id().'.'.$ext;
-   $image_size = $_FILES['image']['size'];
-   $image_tmp_name = $_FILES['image']['tmp_name'];
    $image_folder = '../uploaded_files/'.$rename;
 
    $add_playlist = $conn->prepare("INSERT INTO `playlist`(id, tutor_id, title, description, thumb, status) VALUES(?,?,?,?,?,?)");
    $add_playlist->execute([$id, $tutor_id, $title, $description, $rename, $status]);
 
-   move_uploaded_file($image_tmp_name, $image_folder);
+   move_uploaded_file($_FILES['image']['tmp_name'], $image_folder);
 
-   $message[] = 'new playlist created!';  
-
+   $message[] = 'New playlist created!';  
 }
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
