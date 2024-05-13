@@ -19,15 +19,15 @@ if(isset($_GET['get_id'])){
 if(isset($_POST['update'])){
 
    $video_id = $_POST['video_id'];
-   $video_id = filter_var($video_id, FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
+   $video_id = filter_var($video_id,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $status = $_POST['status'];
-   $status = filter_var($status, FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
+   $status = filter_var($status,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $title = $_POST['title'];
-   $title = filter_var($title, FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
+   $title = filter_var($title,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $description = $_POST['description'];
-   $description = filter_var($description, FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
+   $description = filter_var($description,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $playlist = $_POST['playlist'];
-   $playlist = filter_var($playlist, FILTER_SANITIZE_STRING,FILTER_FLAG_NO_ENCODE_QUOTES);
+   $playlist = filter_var($playlist,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
    $update_content = $conn->prepare("UPDATE `content` SET title = ?, description = ?, status = ? WHERE id = ?");
    $update_content->execute([$title, $description, $status, $video_id]);
@@ -38,9 +38,9 @@ if(isset($_POST['update'])){
    }
 
    $old_thumb = $_POST['old_thumb'];
-   $old_thumb = filter_var($old_thumb, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+   $old_thumb = filter_var($old_thumb, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $thumb = $_FILES['thumb']['name'];
-   $thumb = filter_var($thumb, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+   $thumb = filter_var($thumb, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $thumb_ext = pathinfo($thumb, PATHINFO_EXTENSION);
    $rename_thumb = unique_id().'.'.$thumb_ext;
    $thumb_size = $_FILES['thumb']['size'];
@@ -54,16 +54,16 @@ if(isset($_POST['update'])){
          $update_thumb = $conn->prepare("UPDATE `content` SET thumb = ? WHERE id = ?");
          $update_thumb->execute([$rename_thumb, $video_id]);
          move_uploaded_file($thumb_tmp_name, $thumb_folder);
-         if($old_thumb != '' AND $old_thumb != $rename_thumb){
+         if($old_thumb != '' AND $old_thumb != $rename_thumb && file_exists('../uploaded_files/'.$old_thumb)){
             unlink('../uploaded_files/'.$old_thumb);
          }
       }
    }
 
    $old_video = $_POST['old_video'];
-   $old_video = filter_var($old_video, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+   $old_video = filter_var($old_video, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $video = $_FILES['video']['name'];
-   $video = filter_var($video, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+   $video = filter_var($video, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $video_ext = pathinfo($video, PATHINFO_EXTENSION);
    $rename_video = unique_id().'.'.$video_ext;
    $video_tmp_name = $_FILES['video']['tmp_name'];
@@ -73,7 +73,7 @@ if(isset($_POST['update'])){
       $update_video = $conn->prepare("UPDATE `content` SET video = ? WHERE id = ?");
       $update_video->execute([$rename_video, $video_id]);
       move_uploaded_file($video_tmp_name, $video_folder);
-      if($old_video != '' AND $old_video != $rename_video){
+      if($old_video != '' AND $old_video != $rename_video && file_exists('../uploaded_files/'.$old_video)){
          unlink('../uploaded_files/'.$old_video);
       }
    }
@@ -85,17 +85,21 @@ if(isset($_POST['update'])){
 if(isset($_POST['delete_video'])){
 
    $delete_id = $_POST['video_id'];
-   $delete_id = filter_var($delete_id, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+   $delete_id = filter_var($delete_id, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
    $delete_video_thumb = $conn->prepare("SELECT thumb FROM `content` WHERE id = ? LIMIT 1");
    $delete_video_thumb->execute([$delete_id]);
    $fetch_thumb = $delete_video_thumb->fetch(PDO::FETCH_ASSOC);
-   unlink('../uploaded_files/'.$fetch_thumb['thumb']);
+   if(file_exists('../uploaded_files/'.$fetch_thumb['thumb'])){
+      unlink('../uploaded_files/'.$fetch_thumb['thumb']);
+   }
 
    $delete_video = $conn->prepare("SELECT video FROM `content` WHERE id = ? LIMIT 1");
    $delete_video->execute([$delete_id]);
    $fetch_video = $delete_video->fetch(PDO::FETCH_ASSOC);
-   unlink('../uploaded_files/'.$fetch_video['video']);
+   if(file_exists('../uploaded_files/'.$fetch_video['video'])){
+      unlink('../uploaded_files/'.$fetch_video['video']);
+   }
 
    $delete_likes = $conn->prepare("DELETE FROM `likes` WHERE content_id = ?");
    $delete_likes->execute([$delete_id]);
@@ -109,6 +113,7 @@ if(isset($_POST['delete_video'])){
 }
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

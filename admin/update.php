@@ -1,4 +1,4 @@
-, FILTER_FLAG_NO_ENCODE_QUOTES<?php
+<?php
 
    include '../components/connect.php';
 
@@ -19,11 +19,11 @@ if(isset($_POST['submit'])){
    $prev_image = $fetch_tutor['image'];
 
    $name = $_POST['name'];
-   $name = filter_var($name, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+   $name = filter_var($name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $profession = $_POST['profession'];
-   $profession = filter_var($profession, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+   $profession = filter_var($profession, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $email = $_POST['email'];
-   $email = filter_var($email, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+   $email = filter_var($email, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
    if(!empty($name)){
       $update_name = $conn->prepare("UPDATE `tutors` SET name = ? WHERE id = ?");
@@ -50,7 +50,7 @@ if(isset($_POST['submit'])){
    }
 
    $image = $_FILES['image']['name'];
-   $image = filter_var($image, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+   $image = filter_var($image, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $ext = pathinfo($image, PATHINFO_EXTENSION);
    $rename = unique_id().'.'.$ext;
    $image_size = $_FILES['image']['size'];
@@ -73,11 +73,11 @@ if(isset($_POST['submit'])){
 
    $empty_pass = 'da39a3ee5e6b4b0d3255bfef95601890afd80709';
    $old_pass = sha1($_POST['old_pass']);
-   $old_pass = filter_var($old_pass, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+   $old_pass = filter_var($old_pass, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $new_pass = sha1($_POST['new_pass']);
-   $new_pass = filter_var($new_pass, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+   $new_pass = filter_var($new_pass, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $cpass = sha1($_POST['cpass']);
-   $cpass = filter_var($cpass, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+   $cpass = filter_var($cpass, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
    if($old_pass != $empty_pass){
       if($old_pass != $prev_pass){

@@ -19,19 +19,19 @@ if(isset($_GET['get_id'])){
 if(isset($_POST['submit'])){
 
    $title = $_POST['title'];
-   $title = filter_var($title, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+   $title = filter_var($title, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $description = $_POST['description'];
-   $description = filter_var($description, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+   $description = filter_var($description, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $status = $_POST['status'];
-   $status = filter_var($status, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+   $status = filter_var($status, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
    $update_playlist = $conn->prepare("UPDATE `playlist` SET title = ?, description = ?, status = ? WHERE id = ?");
    $update_playlist->execute([$title, $description, $status, $get_id]);
 
    $old_image = $_POST['old_image'];
-   $old_image = filter_var($old_image, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+   $old_image = filter_var($old_image, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $image = $_FILES['image']['name'];
-   $image = filter_var($image, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+   $image = filter_var($image, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $ext = pathinfo($image, PATHINFO_EXTENSION);
    $rename = unique_id().'.'.$ext;
    $image_size = $_FILES['image']['size'];
@@ -46,7 +46,12 @@ if(isset($_POST['submit'])){
          $update_image->execute([$rename, $get_id]);
          move_uploaded_file($image_tmp_name, $image_folder);
          if($old_image != '' AND $old_image != $rename){
-            unlink('../uploaded_files/'.$old_image);
+            $old_image_path = '../uploaded_files/'.$old_image;
+            if(file_exists($old_image_path)){
+               unlink($old_image_path);
+            } else {
+               $message[] = 'Old image not found!';
+            }
          }
       }
    } 
@@ -57,7 +62,7 @@ if(isset($_POST['submit'])){
 
 if(isset($_POST['delete'])){
    $delete_id = $_POST['playlist_id'];
-   $delete_id = filter_var($delete_id, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+   $delete_id = filter_var($delete_id, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $delete_playlist_thumb = $conn->prepare("SELECT * FROM `playlist` WHERE id = ? LIMIT 1");
    $delete_playlist_thumb->execute([$delete_id]);
    $fetch_thumb = $delete_playlist_thumb->fetch(PDO::FETCH_ASSOC);
@@ -70,6 +75,7 @@ if(isset($_POST['delete'])){
 }
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
