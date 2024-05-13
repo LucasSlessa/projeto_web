@@ -53,41 +53,41 @@ $total_comments = $select_comments->rowCount();
    <div class="box-container">
 
       <div class="box">
-         <h3>welcome!</h3>
+         <h3>Bem vindo!</h3>
          <p><?= $fetch_profile['name']; ?></p>
-         <a href="profile.php" class="btn">view profile</a>
+         <a href="profile.php" class="btn">ver Perfil</a>
       </div>
 
       <div class="box">
          <h3><?= $total_contents; ?></h3>
-         <p>total contents</p>
-         <a href="add_content.php" class="btn">add new content</a>
+         <p>Conteudos</p>
+         <a href="add_content.php" class="btn">novo conteudo</a>
       </div>
 
       <div class="box">
          <h3><?= $total_playlists; ?></h3>
          <p>total playlists</p>
-         <a href="add_playlist.php" class="btn">add new playlist</a>
+         <a href="add_playlist.php" class="btn">nova playlist</a>
       </div>
 
       <div class="box">
          <h3><?= $total_likes; ?></h3>
          <p>total likes</p>
-         <a href="contents.php" class="btn">view contents</a>
+         <a href="contents.php" class="btn">ver conteudos</a>
       </div>
 
       <div class="box">
          <h3><?= $total_comments; ?></h3>
-         <p>total comments</p>
-         <a href="comments.php" class="btn">view comments</a>
+         <p>Comentarios</p>
+         <a href="comments.php" class="btn">ver comentarios</a>
       </div>
 
       <div class="box">
-         <h3>quick select</h3>
-         <p>login or register</p>
+         <h3>Seleção rapida</h3>
+         <p>login ou registro</p>
          <div class="flex-btn">
             <a href="login.php" class="option-btn">login</a>
-            <a href="register.php" class="option-btn">register</a>
+            <a href="register.php" class="option-btn">registrar</a>
          </div>
       </div>
 

@@ -67,22 +67,22 @@ if(isset($_POST['submit'])){
    
 <section class="video-form">
 
-   <h1 class="heading">upload content</h1>
+   <h1 class="heading">Enviar Conteudo</h1>
 
    <form action="" method="post" enctype="multipart/form-data">
       <p>video status <span>*</span></p>
       <select name="status" class="box" required>
-         <option value="" selected disabled>-- select status</option>
-         <option value="active">active</option>
-         <option value="deactive">deactive</option>
+         <option value="" selected disabled>-- Selecione o Status</option>
+         <option value="active">ativo</option>
+         <option value="deactive">inativo</option>
       </select>
-      <p>video title <span>*</span></p>
-      <input type="text" name="title" maxlength="100" required placeholder="enter video title" class="box">
-      <p>video description <span>*</span></p>
-      <textarea name="description" class="box" required placeholder="write description" maxlength="1000" cols="30" rows="10"></textarea>
+      <p>titulo do video <span>*</span></p>
+      <input type="text" name="title" maxlength="100" required placeholder="titulo do video" class="box">
+      <p>Descrição do video <span>*</span></p>
+      <textarea name="description" class="box" required placeholder="escreva uma descrição" maxlength="1000" cols="30" rows="10"></textarea>
       <p>video playlist <span>*</span></p>
       <select name="playlist" class="box" required>
-         <option value="" disabled selected>--select playlist</option>
+         <option value="" disabled selected>--selecione uma playlist</option>
          <?php
          $select_playlists = $conn->prepare("SELECT * FROM `playlist` WHERE tutor_id = ?");
          $select_playlists->execute([$tutor_id]);
@@ -99,9 +99,9 @@ if(isset($_POST['submit'])){
          }
          ?>
       </select>
-      <p>select thumbnail <span>*</span></p>
+      <p>thumbnail <span>*</span></p>
       <input type="file" name="thumb" accept="image/*" required class="box">
-      <p>select video <span>*</span></p>
+      <p>video <span>*</span></p>
       <input type="file" name="video" accept="video/*" required class="box">
       <input type="submit" value="upload video" name="submit" class="btn">
    </form>
