@@ -38,20 +38,20 @@ if(isset($message)){
          ?>
          <img src="uploaded_files/<?= $fetch_profile['image']; ?>" alt="">
          <h3><?= $fetch_profile['name']; ?></h3>
-         <span>student</span>
-         <a href="profile.php" class="btn">view profile</a>
+         <span>estudante</span>
+         <a href="profile.php" class="btn">visualizar perfil</a>
          <div class="flex-btn">
             <a href="login.php" class="option-btn">login</a>
-            <a href="register.php" class="option-btn">register</a>
+            <a href="register.php" class="option-btn">registro</a>
          </div>
          <a href="components/user_logout.php" onclick="return confirm('logout from this website?');" class="delete-btn">logout</a>
          <?php
             }else{
          ?>
-         <h3>please login or register</h3>
+         <h3>login ou registre-se</h3>
           <div class="flex-btn">
             <a href="login.php" class="option-btn">login</a>
-            <a href="register.php" class="option-btn">register</a>
+            <a href="register.php" class="option-btn">registro</a>
          </div>
          <?php
             }
@@ -81,12 +81,12 @@ if(isset($message)){
          ?>
          <img src="uploaded_files/<?= $fetch_profile['image']; ?>" alt="">
          <h3><?= $fetch_profile['name']; ?></h3>
-         <span>student</span>
-         <a href="profile.php" class="btn">view profile</a>
+         <span>estudante</span>
+         <a href="profile.php" class="btn">ver perfil</a>
          <?php
             }else{
          ?>
-         <h3>please login or register</h3>
+         <h3>login ou registre-se</h3>
           <div class="flex-btn" style="padding-top: .5rem;">
             <a href="login.php" class="option-btn">login</a>
             <a href="register.php" class="option-btn">register</a>
@@ -98,10 +98,10 @@ if(isset($message)){
 
    <nav class="navbar">
       <a href="home.php"><i class="fas fa-home"></i><span>home</span></a>
-      <a href="about.php"><i class="fas fa-question"></i><span>about us</span></a>
-      <a href="courses.php"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
-      <a href="teachers.php"><i class="fas fa-chalkboard-user"></i><span>teachers</span></a>
-      <a href="contact.php"><i class="fas fa-headset"></i><span>contact us</span></a>
+      <a href="about.php"><i class="fas fa-question"></i><span>Sobre-Nos</span></a>
+      <a href="courses.php"><i class="fas fa-graduation-cap"></i><span>Projetos</span></a>
+      <a href="teachers.php"><i class="fas fa-chalkboard-user"></i><span>Professores</span></a>
+      <a href="contact.php"><i class="fas fa-headset"></i><span>nos Contate</span></a>
    </nav>
 
 </div>

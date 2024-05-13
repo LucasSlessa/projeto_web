@@ -84,7 +84,7 @@ if(isset($_POST['delete_playlist'])){
    
 <section class="contents">
 
-   <h1 class="heading">contents</h1>
+   <h1 class="heading">conteudos</h1>
 
    <div class="box-container">
 
@@ -107,17 +107,17 @@ if(isset($_POST['delete_playlist'])){
          <form action="" method="post" class="flex-btn">
             <input type="hidden" name="video_id" value="<?= $video_id; ?>">
             <a href="update_content.php?get_id=<?= $video_id; ?>" class="option-btn">update</a>
-            <input type="submit" value="delete" class="delete-btn" onclick="return confirm('delete this video?');" name="delete_video">
+            <input type="submit" value="delete" class="delete-btn" onclick="return confirm('deletar este video?');" name="delete_video">
          </form>
          <a href="view_content.php?get_id=<?= $video_id; ?>" class="btn">view content</a>
       </div>
    <?php
          }
       }else{
-         echo '<p class="empty">no contents founds!</p>';
+         echo '<p class="empty">nada encontrado!</p>';
       }
    }else{
-      echo '<p class="empty">please search something!</p>';
+      echo '<p class="empty">porfavor pesquise algo!!</p>';
    }
    ?>
 
@@ -156,17 +156,17 @@ if(isset($_POST['delete_playlist'])){
          <p class="description"><?= $fetch_playlist['description']; ?></p>
          <form action="" method="post" class="flex-btn">
             <input type="hidden" name="playlist_id" value="<?= $playlist_id; ?>">
-            <a href="update_playlist.php?get_id=<?= $playlist_id; ?>" class="option-btn">update</a>
+            <a href="update_playlist.php?get_id=<?= $playlist_id; ?>" class="option-btn">atualizar</a>
             <input type="submit" value="delete_playlist" class="delete-btn" onclick="return confirm('delete this playlist?');" name="delete">
          </form>
-         <a href="view_playlist.php?get_id=<?= $playlist_id; ?>" class="btn">view playlist</a>
+         <a href="view_playlist.php?get_id=<?= $playlist_id; ?>" class="btn">ver playlists</a>
       </div>
       <?php
          } 
       }else{
-         echo '<p class="empty">no playlists found!</p>';
+         echo '<p class="empty">nenhuma playlist encontrada</p>';
       }}else{
-         echo '<p class="empty">please search something!</p>';
+         echo '<p class="empty">porfavor pesquise algo!</p>';
       }
       ?>
 

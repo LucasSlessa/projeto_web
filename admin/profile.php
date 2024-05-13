@@ -48,35 +48,35 @@
    
 <section class="tutor-profile" style="min-height: calc(100vh - 19rem);"> 
 
-   <h1 class="heading">profile details</h1>
+   <h1 class="heading">Detalhes do perfil</h1>
 
    <div class="details">
       <div class="tutor">
          <img src="../uploaded_files/<?= $fetch_profile['image']; ?>" alt="">
          <h3><?= $fetch_profile['name']; ?></h3>
          <span><?= $fetch_profile['profession']; ?></span>
-         <a href="update.php" class="inline-btn">update profile</a>
+         <a href="update.php" class="inline-btn">Atualizar perfil</a>
       </div>
       <div class="flex">
          <div class="box">
             <span><?= $total_playlists; ?></span>
-            <p>total playlists</p>
-            <a href="playlists.php" class="btn">view playlists</a>
+            <p>total de playlists</p>
+            <a href="playlists.php" class="btn">visualizar playlists</a>
          </div>
          <div class="box">
             <span><?= $total_contents; ?></span>
-            <p>total videos</p>
-            <a href="contents.php" class="btn">view contents</a>
+            <p>total de videos</p>
+            <a href="contents.php" class="btn">ver conteudos</a>
          </div>
          <div class="box">
             <span><?= $total_likes; ?></span>
-            <p>total likes</p>
-            <a href="contents.php" class="btn">view contents</a>
+            <p>total de likes</p>
+            <a href="contents.php" class="btn">ver conteudos</a>
          </div>
          <div class="box">
             <span><?= $total_comments; ?></span>
-            <p>total comments</p>
-            <a href="comments.php" class="btn">view comments</a>
+            <p>comentarios</p>
+            <a href="comments.php" class="btn">ver comentarios</a>
          </div>
       </div>
    </div>
