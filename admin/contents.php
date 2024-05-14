@@ -59,13 +59,13 @@ if(isset($_POST['delete_video'])){
    
 <section class="contents">
 
-   <h1 class="heading">Seus Conteudos</h1>
+   <h1 class="heading">Seus Projetos</h1>
 
    <div class="box-container">
 
    <div class="box" style="text-align: center;">
-      <h3 class="title" style="margin-bottom: .5rem;">novo conteudo</h3>
-      <a href="add_content.php" class="btn">adicionar conteudo</a>
+      <h3 class="title" style="margin-bottom: .5rem;">novo projeto</h3>
+      <a href="add_content.php" class="btn">adicionar projeto</a>
    </div>
 
    <?php
@@ -92,7 +92,7 @@ if(isset($_POST['delete_video'])){
    <?php
          }
       }else{
-         echo '<p class="empty">no contents added yet!</p>';
+         echo '<p class="empty">nenhum projeto adicionado ainda!</p>';
       }
    ?>
 

@@ -20,9 +20,9 @@ if(isset($_POST['delete_comment'])){
    if($verify_comment->rowCount() > 0){
       $delete_comment = $conn->prepare("DELETE FROM `comments` WHERE id = ?");
       $delete_comment->execute([$delete_id]);
-      $message[] = 'comment deleted successfully!';
+      $message[] = 'deletado com sucesso!';
    }else{
-      $message[] = 'comment already deleted!';
+      $message[] = 'comentario ja deletado!';
    }
 
 }
@@ -75,7 +75,7 @@ if(isset($_POST['delete_comment'])){
       <?php
        }
       }else{
-         echo '<p class="empty">no comments added yet!</p>';
+         echo '<p class="empty">nenhum comentario ainda!</p>';
       }
       ?>
       </div>
