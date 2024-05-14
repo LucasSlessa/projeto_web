@@ -45,7 +45,7 @@ $total_bookmarked = $select_bookmark->rowCount();
 
 <section class="quick-select">
 
-   <h1 class="heading">quick options</h1>
+   <h1 class="heading">opçoes</h1>
 
    <div class="box-container">
 
@@ -53,22 +53,22 @@ $total_bookmarked = $select_bookmark->rowCount();
          if($user_id != ''){
       ?>
       <div class="box">
-         <h3 class="title">likes and comments</h3>
-         <p>total likes : <span><?= $total_likes; ?></span></p>
-         <a href="likes.php" class="inline-btn">view likes</a>
-         <p>total comments : <span><?= $total_comments; ?></span></p>
-         <a href="comments.php" class="inline-btn">view comments</a>
-         <p>saved playlist : <span><?= $total_bookmarked; ?></span></p>
-         <a href="bookmark.php" class="inline-btn">view bookmark</a>
+         <h3 class="title">likes e comentarios</h3>
+         <p>total de likes : <span><?= $total_likes; ?></span></p>
+         <a href="likes.php" class="inline-btn">ver likes</a>
+         <p>total de comentarios : <span><?= $total_comments; ?></span></p>
+         <a href="comments.php" class="inline-btn">ver comentarios</a>
+         <p>playlists salvas : <span><?= $total_bookmarked; ?></span></p>
+         <a href="bookmark.php" class="inline-btn">ver favoritos</a>
       </div>
       <?php
          }else{ 
       ?>
       <div class="box" style="text-align: center;">
-         <h3 class="title">please login or register</h3>
+         <h3 class="title">porfavor registre-se ou login</h3>
           <div class="flex-btn" style="padding-top: .5rem;">
             <a href="login.php" class="option-btn">login</a>
-            <a href="register.php" class="option-btn">register</a>
+            <a href="register.php" class="option-btn">registre-se</a>
          </div>
       </div>
       <?php
@@ -76,21 +76,21 @@ $total_bookmarked = $select_bookmark->rowCount();
       ?>
 
       <div class="box">
-         <h3 class="title">top categories</h3>
+         <h3 class="title">top categorias</h3>
          <div class="flex">
-            <a href="search_course.php?"><i class="fas fa-code"></i><span>development</span></a>
-            <a href="#"><i class="fas fa-chart-simple"></i><span>business</span></a>
+            <a href="search_course.php?"><i class="fas fa-code"></i><span>desenvolvimento</span></a>
+            <a href="#"><i class="fas fa-chart-simple"></i><span>negocios</span></a>
             <a href="#"><i class="fas fa-pen"></i><span>design</span></a>
             <a href="#"><i class="fas fa-chart-line"></i><span>marketing</span></a>
-            <a href="#"><i class="fas fa-music"></i><span>music</span></a>
-            <a href="#"><i class="fas fa-camera"></i><span>photography</span></a>
+            <a href="#"><i class="fas fa-music"></i><span>musica</span></a>
+            <a href="#"><i class="fas fa-camera"></i><span>Fotografia</span></a>
             <a href="#"><i class="fas fa-cog"></i><span>software</span></a>
-            <a href="#"><i class="fas fa-vial"></i><span>science</span></a>
+            <a href="#"><i class="fas fa-vial"></i><span>ciencia</span></a>
          </div>
       </div>
 
       <div class="box">
-         <h3 class="title">popular topics</h3>
+         <h3 class="title">topicos populares</h3>
          <div class="flex">
             <a href="#"><i class="fab fa-html5"></i><span>HTML</span></a>
             <a href="#"><i class="fab fa-css3"></i><span>CSS</span></a>
@@ -102,9 +102,9 @@ $total_bookmarked = $select_bookmark->rowCount();
       </div>
 
       <div class="box tutor">
-         <h3 class="title">become a tutor</h3>
-         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, laudantium.</p>
-         <a href="admin/register.php" class="inline-btn">get started</a>
+         <h3 class="title">Torne-se um tutor</h3>
+         <p>Tutores sao responsaveis por enviar os tcc's de seus alunos</p>
+         <a href="admin/register.php" class="inline-btn">começar</a>
       </div>
 
    </div>
@@ -117,7 +117,7 @@ $total_bookmarked = $select_bookmark->rowCount();
 
 <section class="courses">
 
-   <h1 class="heading">latest courses</h1>
+   <h1 class="heading">Ultimos projetos</h1>
 
    <div class="box-container">
 
@@ -142,19 +142,19 @@ $total_bookmarked = $select_bookmark->rowCount();
          </div>
          <img src="uploaded_files/<?= $fetch_course['thumb']; ?>" class="thumb" alt="">
          <h3 class="title"><?= $fetch_course['title']; ?></h3>
-         <a href="playlist.php?get_id=<?= $course_id; ?>" class="inline-btn">view playlist</a>
+         <a href="playlist.php?get_id=<?= $course_id; ?>" class="inline-btn">visualizar playlist</a>
       </div>
       <?php
          }
       }else{
-         echo '<p class="empty">no courses added yet!</p>';
+         echo '<p class="empty">nenhum projeto ainda!</p>';
       }
       ?>
 
    </div>
 
    <div class="more-btn">
-      <a href="courses.php" class="inline-option-btn">view more</a>
+      <a href="courses.php" class="inline-option-btn">ver mais</a>
    </div>
 
 </section>

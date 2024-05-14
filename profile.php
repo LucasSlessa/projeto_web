@@ -29,7 +29,7 @@ $total_bookmarked = $select_bookmark->rowCount();
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>profile</title>
+   <title>perfil</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -44,15 +44,15 @@ $total_bookmarked = $select_bookmark->rowCount();
 
 <section class="profile">
 
-   <h1 class="heading">profile details</h1>
+   <h1 class="heading">detalhes do perfil</h1>
 
    <div class="details">
 
       <div class="user">
          <img src="uploaded_files/<?= $fetch_profile['image']; ?>" alt="">
          <h3><?= $fetch_profile['name']; ?></h3>
-         <p>student</p>
-         <a href="update.php" class="inline-btn">update profile</a>
+         <p>estudante</p>
+         <a href="update.php" class="inline-btn">atualizar perfil</a>
       </div>
 
       <div class="box-container">
@@ -62,10 +62,10 @@ $total_bookmarked = $select_bookmark->rowCount();
                <i class="fas fa-bookmark"></i>
                <div>
                   <h3><?= $total_bookmarked; ?></h3>
-                  <span>saved playlists</span>
+                  <span>playlists salvas</span>
                </div>
             </div>
-            <a href="#" class="inline-btn">view playlists</a>
+            <a href="playlist.php" class="inline-btn">ver playlists</a>
          </div>
 
          <div class="box">
@@ -73,10 +73,10 @@ $total_bookmarked = $select_bookmark->rowCount();
                <i class="fas fa-heart"></i>
                <div>
                   <h3><?= $total_likes; ?></h3>
-                  <span>liked tutorials</span>
+                  <span>likes</span>
                </div>
             </div>
-            <a href="#" class="inline-btn">view liked</a>
+            <a href="likes.php" class="inline-btn">ver likes</a>
          </div>
 
          <div class="box">
@@ -84,10 +84,10 @@ $total_bookmarked = $select_bookmark->rowCount();
                <i class="fas fa-comment"></i>
                <div>
                   <h3><?= $total_comments; ?></h3>
-                  <span>video comments</span>
+                  <span>comentarios de videos</span>
                </div>
             </div>
-            <a href="#" class="inline-btn">view comments</a>
+            <a href="comments.php" class="inline-btn">ver comentarios</a>
          </div>
 
       </div>
@@ -113,7 +113,7 @@ $total_bookmarked = $select_bookmark->rowCount();
 
 <footer class="footer">
 
-   &copy; copyright @ 2022 by <span>mr. web designer</span> | all rights reserved!
+   &copy; copyright @ 2024 by <span>alutechnology</span> | all rights reserved!
 
 </footer>
 

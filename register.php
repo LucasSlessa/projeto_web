@@ -66,24 +66,24 @@ if (isset($_POST['submit'])) {
 <section class="form-container">
 
    <form class="register" action="" method="post" enctype="multipart/form-data">
-      <h3>create account</h3>
+      <h3>criar conta</h3>
       <div class="flex">
          <div class="col">
-            <p>your name <span>*</span></p>
+            <p>seu nome <span>*</span></p>
             <input type="text" name="name" placeholder="enter your name" maxlength="50" required class="box">
-            <p>your email <span>*</span></p>
+            <p>seu email <span>*</span></p>
             <input type="email" name="email" placeholder="enter your email" maxlength="50" required class="box">
          </div>
          <div class="col">
-            <p>your password <span>*</span></p>
+            <p>sua senha <span>*</span></p>
             <input type="password" name="pass" placeholder="enter your password" maxlength="20" required class="box">
-            <p>confirm password <span>*</span></p>
+            <p>confirmar senha <span>*</span></p>
             <input type="password" name="cpass" placeholder="confirm your password" maxlength="20" required class="box">
          </div>
       </div>
-      <p>select pic <span>*</span></p>
+      <p>selecionar foto <span>*</span></p>
       <input type="file" name="image" accept="image/*" required class="box">
-      <p class="link">already have an account? <a href="login.php">login now</a></p>
+      <p class="link">ja possui uma conta? <a href="login.php">faça login</a></p>
       <input type="submit" name="submit" value="register now" class="btn">
    </form>
 

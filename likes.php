@@ -13,7 +13,7 @@ if(isset($_POST['remove'])){
 
    if($user_id != ''){
       $content_id = $_POST['content_id'];
-      $content_id = filter_var($content_id, FILTER_SANITIZE_STRING);
+      $content_id = filter_var($content_id, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
       $verify_likes = $conn->prepare("SELECT * FROM `likes` WHERE user_id = ? AND content_id = ?");
       $verify_likes->execute([$user_id, $content_id]);
@@ -21,10 +21,10 @@ if(isset($_POST['remove'])){
       if($verify_likes->rowCount() > 0){
          $remove_likes = $conn->prepare("DELETE FROM `likes` WHERE user_id = ? AND content_id = ?");
          $remove_likes->execute([$user_id, $content_id]);
-         $message[] = 'removed from likes!';
+         $message[] = 'remover likes!';
       }
    }else{
-      $message[] = 'please login first!';
+      $message[] = 'faça login antes!';
    }
 
 }
@@ -37,7 +37,7 @@ if(isset($_POST['remove'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>liked videos</title>
+   <title>videos curtidos</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -54,7 +54,7 @@ if(isset($_POST['remove'])){
 
 <section class="liked-videos">
 
-   <h1 class="heading">liked videos</h1>
+   <h1 class="heading">videos curtidos</h1>
 
    <div class="box-container">
 
@@ -86,18 +86,18 @@ if(isset($_POST['remove'])){
       <h3 class="title"><?= $fetch_contents['title']; ?></h3>
       <form action="" method="post" class="flex-btn">
          <input type="hidden" name="content_id" value="<?= $fetch_contents['id']; ?>">
-         <a href="watch_video.php?get_id=<?= $fetch_contents['id']; ?>" class="inline-btn">watch video</a>
+         <a href="watch_video.php?get_id=<?= $fetch_contents['id']; ?>" class="inline-btn">Assistir video</a>
          <input type="submit" value="remove" class="inline-delete-btn" name="remove">
       </form>
    </div>
    <?php
             }
          }else{
-            echo '<p class="emtpy">content was not found!</p>';         
+            echo '<p class="emtpy">Conteudo nao encontrado!</p>';         
          }
       }
    }else{
-      echo '<p class="empty">nothing added to likes yet!</p>';
+      echo '<p class="empty">nada asicionado aos likes ainda!</p>';
    }
    ?>
 

@@ -10,7 +10,7 @@ if (isset($_COOKIE['user_id'])) {
 if (isset($_POST['submit'])) {
 
    $email = $_POST['email'];
-   $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+   $email = filter_var($_POST['email'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $password = $_POST['pass'];
 
    $select_user = $conn->prepare("SELECT * FROM `users` WHERE email = ? LIMIT 1");
@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
       header('location: home.php');
       exit; // Adicionando exit para garantir que o script seja interrompido após o redirecionamento
    } else {
-      $message[] = 'incorrect email or password!';
+      $message[] = 'senha ou email incorretos';
    }
 
   
@@ -52,12 +52,12 @@ if (isset($_POST['submit'])) {
 <section class="form-container">
 
    <form action="" method="post" enctype="multipart/form-data" class="login">
-      <h3>welcome back!</h3>
-      <p>your email <span>*</span></p>
-      <input type="email" name="email" placeholder="enter your email" maxlength="50" required class="box">
-      <p>your password <span>*</span></p>
-      <input type="password" name="pass" placeholder="enter your password" maxlength="20" required class="box">
-      <p class="link">don't have an account? <a href="register.php">register now</a></p>
+      <h3>Bem vindo de volta!</h3>
+      <p>seu email <span>*</span></p>
+      <input type="email" name="email" placeholder="digite seu email" maxlength="50" required class="box">
+      <p>sua senha <span>*</span></p>
+      <input type="password" name="pass" placeholder="digite sua senha" maxlength="20" required class="box">
+      <p class="link">não possui uma conta? <a href="register.php">registre-se agora</a></p>
       <input type="submit" name="submit" value="login now" class="btn">
    </form>
 
