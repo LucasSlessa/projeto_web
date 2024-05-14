@@ -99,7 +99,7 @@ if(isset($message)){
    <nav class="navbar">
       <a href="dashboard.php"><i class="fas fa-home"></i><span>home</span></a>
       <a href="playlists.php"><i class="fa-solid fa-bars-staggered"></i><span>playlists</span></a>
-      <a href="contents.php"><i class="fas fa-graduation-cap"></i><span>conteudo</span></a>
+      <a href="contents.php"><i class="fas fa-graduation-cap"></i><span>Projetos</span></a>
       <a href="comments.php"><i class="fas fa-comment"></i><span>comentario</span></a>
       <a href="../components/admin_logout.php" onclick="return confirm('deslogar do website?');"><i class="fas fa-right-from-bracket"></i><span>deslogar</span></a>
    </nav>

@@ -32,13 +32,13 @@ if(isset($_POST['submit'])){
    $video_folder = '../uploaded_files/'.$rename_video;
 
    if($thumb_size > 2000000){
-      $message[] = 'image size is too large!';
+      $message[] = 'imagem muito grande!';
    }else{
       $add_playlist = $conn->prepare("INSERT INTO `content`(id, tutor_id, playlist_id, title, description, video, thumb, status) VALUES(?,?,?,?,?,?,?,?)");
       $add_playlist->execute([$id, $tutor_id, $playlist, $title, $description, $rename_video, $rename_thumb, $status]);
       move_uploaded_file($thumb_tmp_name, $thumb_folder);
       move_uploaded_file($video_tmp_name, $video_folder);
-      $message[] = 'new course uploaded!';
+      $message[] = 'novo projeto enviado!';
    }
 
 }
@@ -67,20 +67,20 @@ if(isset($_POST['submit'])){
    
 <section class="video-form">
 
-   <h1 class="heading">Enviar Conteudo</h1>
+   <h1 class="heading">Enviar Projeto</h1>
 
    <form action="" method="post" enctype="multipart/form-data">
-      <p>video status <span>*</span></p>
+      <p>status <span>*</span></p>
       <select name="status" class="box" required>
          <option value="" selected disabled>-- Selecione o Status</option>
          <option value="active">ativo</option>
          <option value="deactive">inativo</option>
       </select>
-      <p>titulo do video <span>*</span></p>
-      <input type="text" name="title" maxlength="100" required placeholder="titulo do video" class="box">
-      <p>Descrição do video <span>*</span></p>
+      <p>titulo do Projeto <span>*</span></p>
+      <input type="text" name="title" maxlength="100" required placeholder="titulo do projeto" class="box">
+      <p>Descrição do Projeto<span>*</span></p>
       <textarea name="description" class="box" required placeholder="escreva uma descrição" maxlength="1000" cols="30" rows="10"></textarea>
-      <p>video playlist <span>*</span></p>
+      <p>playlist <span>*</span></p>
       <select name="playlist" class="box" required>
          <option value="" disabled selected>--selecione uma playlist</option>
          <?php
@@ -95,15 +95,15 @@ if(isset($_POST['submit'])){
          ?>
          <?php
          }else{
-            echo '<option value="" disabled>no playlist created yet!</option>';
+            echo '<option value="" disabled>nenhuma playlist criada!</option>';
          }
          ?>
       </select>
-      <p>thumbnail <span>*</span></p>
+      <p>thumbnail<span>*</span></p>
       <input type="file" name="thumb" accept="image/*" required class="box">
       <p>video <span>*</span></p>
       <input type="file" name="video" accept="video/*" required class="box">
-      <input type="submit" value="upload video" name="submit" class="btn">
+      <input type="submit" value="enviar projeto" name="submit" class="btn">
    </form>
 
 </section>
