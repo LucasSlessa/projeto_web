@@ -132,7 +132,7 @@ if(isset($_POST['update_now'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>watch video</title>
+   <title>videos</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -160,7 +160,7 @@ if(isset($_POST['update_now'])){
       <input type="hidden" name="update_id" value="<?= $fetch_edit_comment['id']; ?>">
       <textarea name="update_box" class="box" maxlength="1000" required placeholder="digite seu comentario" cols="30" rows="10"><?= $fetch_edit_comment['comment']; ?></textarea>
       <div class="flex">
-         <a href="watch_video.php?get_id=<?= $get_id; ?>" class="inline-option-btn">cancel edit</a>
+         <a href="watch_video.php?get_id=<?= $get_id; ?>" class="inline-option-btn">cancelar ediçao</a>
          <input type="submit" value="atualizar agora" name="update_now" class="inline-btn">
       </div>
    </form>
@@ -240,7 +240,8 @@ if(isset($_POST['update_now'])){
 
 <section class="comments">
 
-   <h1 class="heading">adicionar comentariot</h1>
+   <h1 class="heading">adicionar comentarios
+   </h1>
 
    <form action="" method="post" class="add-comment">
       <input type="hidden" name="content_id" value="<?= $get_id; ?>">
