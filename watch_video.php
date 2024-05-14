@@ -222,7 +222,7 @@ if(isset($_POST['update_now'])){
          <?php
             }
          ?>
-      </form>
+      </form>z
       <div class="description"><p><?= $fetch_content['description']; ?></p></div>
    </div>
    <?php
