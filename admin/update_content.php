@@ -78,7 +78,7 @@ if(isset($_POST['update'])){
       }
    }
 
-   $message[] = 'content updated!';
+   $message[] = 'conteudo atualizado!';
 
 }
 
@@ -121,7 +121,7 @@ if(isset($_POST['delete_video'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>atualizar video</title>
+   <title>Atualizar video</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -147,7 +147,7 @@ if(isset($_POST['delete_video'])){
    ?>
    <form action="" method="post" enctype="multipart/form-data">
       <input type="hidden" name="video_id" value="<?= $fecth_videos['id']; ?>">
-      <input type="hidden" name="old_thumb" value="<?= $fecth_videos['thumb']; ?>">
+      <input type="hidden" name="old_thumb" val ue="<?= $fecth_videos['thumb']; ?>">
       <input type="hidden" name="old_video" value="<?= $fecth_videos['video']; ?>">
       <p>atualizar status <span>*</span></p>
       <select name="status" class="box" required>
@@ -155,11 +155,11 @@ if(isset($_POST['delete_video'])){
          <option value="active">ativo</option>
          <option value="deactive">inativo</option>
       </select>
-      <p>update title <span>*</span></p>
-      <input type="text" name="title" maxlength="100" required placeholder="enter video title" class="box" value="<?= $fecth_videos['title']; ?>">
-      <p>update description <span>*</span></p>
-      <textarea name="description" class="box" required placeholder="write description" maxlength="1000" cols="30" rows="10"><?= $fecth_videos['description']; ?></textarea>
-      <p>update playlist</p>
+      <p>Atualizar titulo <span>*</span></p>
+      <input type="text" name="title" maxlength="100" required placeholder="titulo do projeto" class="box" value="<?= $fecth_videos['title']; ?>">
+      <p>Atualizar descriçao<span>*</span></p>
+      <textarea name="description" class="box" required placeholder="Escreva a descrição" maxlength="1000" cols="30" rows="10"><?= $fecth_videos['description']; ?></textarea>
+      <p>Atualizar playlist</p>
       <select name="playlist" class="box">
          <option value="<?= $fecth_videos['playlist_id']; ?>" selected>--selecionar playlist</option>
          <?php
@@ -179,15 +179,15 @@ if(isset($_POST['delete_video'])){
          ?>
       </select>
       <img src="../uploaded_files/<?= $fecth_videos['thumb']; ?>" alt="">
-      <p>update thumbnail</p>
+      <p>atualizar thumbnail</p>
       <input type="file" name="thumb" accept="image/*" class="box">
       <video src="../uploaded_files/<?= $fecth_videos['video']; ?>" controls></video>
-      <p>update video</p>
+      <p>atualizar video</p>
       <input type="file" name="video" accept="video/*" class="box">
-      <input type="submit" value="update content" name="update" class="btn">
+      <input type="submit" value="Atualizar projeto" name="update" class="btn">
       <div class="flex-btn">
          <a href="view_content.php?get_id=<?= $video_id; ?>" class="option-btn">ver conteudo</a>
-         <input type="submit" value="delete content" name="delete_video" class="delete-btn">
+         <input type="submit" value="Deletar projeto" name="delete_video" class="delete-btn">
       </div>
    </form>
    <?php
@@ -198,19 +198,6 @@ if(isset($_POST['delete_video'])){
    ?>
 
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <?php include '../components/footer.php'; ?>

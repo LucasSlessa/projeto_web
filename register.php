@@ -21,28 +21,27 @@ if (isset($_POST['submit'])) {
    $image_size = $_FILES['image']['size'];
    $image_tmp_name = $_FILES['image']['tmp_name'];
    $image_folder = 'uploaded_files/' . $rename;
-   
-   $select_user = $conn->prepare("SELECT * FROM `users` WHERE email = ?");
-   $select_user->execute([$email]);
-   
-   if ($select_user->rowCount() > 0) {
-      $message[] = 'email already taken!';
+
+   $ra = $_POST['ra'];
+   $funcao = $_POST['funcao'];
+   $cpf = $_POST['cpf'];
+
+   $select_validation = $conn->prepare("SELECT * FROM `users_validation` WHERE ra = ? AND funcao = ? AND cpf = ?");
+   $select_validation->execute([$ra, $funcao, $cpf]);
+
+   if ($select_validation->rowCount() > 0) {
+      $insert_user = $conn->prepare("INSERT INTO `users`(id, name, email, password, image) VALUES(?,?,?,?,?)");
+      $insert_user->execute([$id, $name, $email, $pass, $rename]);
+      move_uploaded_file($image_tmp_name, $image_folder);
+      
+      // Redirect to login page after successful registration
+      header('location: login.php');
+      exit;
    } else {
-      if ($_POST['pass'] != $_POST['cpass']) {
-         $message[] = 'confirm password not matched!';
-      } else {
-         $insert_user = $conn->prepare("INSERT INTO `users`(id, name, email, password, image) VALUES(?,?,?,?,?)");
-         $insert_user->execute([$id, $name, $email, $pass, $rename]);
-         move_uploaded_file($image_tmp_name, $image_folder);
-         
-         // Redirect to login page after successful registration
-         header('location: login.php');
-         exit; // Adicionando exit para garantir que o script seja interrompido após o redirecionamento
-      }
+      $message[] = 'Validação de CPF, função e RA falhou!';
    }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -81,10 +80,24 @@ if (isset($_POST['submit'])) {
             <input type="password" name="cpass" placeholder="confirm your password" maxlength="20" required class="box">
          </div>
       </div>
+      <div class="col">
+         <p>RA <span>*</span></p>
+         <input type="text" name="ra" placeholder="Digite seu RA" maxlength="50" required class="box">
+         <p>Sua função <span>*</span></p>
+         <select name="funcao" required class="box">
+            <option value="" disabled selected>-- Selecione sua função --</option>
+            <option value="aluno">Aluno</option>
+            <option value="professor">Professor</option>
+         </select>
+      </div>
+      <div class="col">
+         <p>CPF <span>*</span></p>
+         <input type="text" name="cpf" placeholder="Digite seu CPF" maxlength="20" required class="box">
+      </div>
       <p>selecionar foto <span>*</span></p>
       <input type="file" name="image" accept="image/*" required class="box">
       <p class="link">ja possui uma conta? <a href="login.php">faça login</a></p>
-      <input type="submit" name="submit" value="register now" class="btn">
+      <input type="submit" name="submit" value="registrar" class="btn">
    </form>
 
 </section>

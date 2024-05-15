@@ -128,7 +128,7 @@ if(isset($_POST['delete'])){
          <img src="../uploaded_files/<?= $fetch_playlist['thumb']; ?>" alt="">
       </div>
       <input type="file" name="image" accept="image/*" class="box">
-      <input type="submit" value="update playlist" name="submit" class="btn">
+      <input type="submit" value="Atualizar playlist" name="submit" class="btn">
       <div class="flex-btn">
          <input type="submit" value="delete" class="delete-btn" onclick="return confirm('excluir esta playlist?');" name="delete">
          <a href="view_playlist.php?get_id=<?= $playlist_id; ?>" class="option-btn">vier playlists</a>
