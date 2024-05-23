@@ -16,26 +16,26 @@ if (isset($_POST['submit'])) {
    $row = $select_user->fetch(PDO::FETCH_ASSOC);
 
    if ($select_user->rowCount() > 0 && $nascimento == $row['nascimento']) {
-      // Verifica se o usuário já existe na tabela 'users'
-      $select_existing_user = $conn->prepare("SELECT * FROM `users` WHERE id = ? LIMIT 1");
-      $select_existing_user->execute([$row['id']]);
-      $existing_user = $select_existing_user->fetch(PDO::FETCH_ASSOC);
-
-      if ($select_existing_user->rowCount() == 0) {
-         // Se não existir, insere um novo registro na tabela 'users'
-         $insert_user = $conn->prepare("INSERT INTO `users` (id, name, password) VALUES (?, ?, ?)");
-         $insert_user->execute([$row['id'], $row['ra'], password_hash($row['nascimento'], PASSWORD_DEFAULT)]);
-      }
-
-      setcookie('user_id', $row['id'], time() + 60*60*24*30, '/');
+      // Verifica se é aluno
       if ($row['funcao'] == 'aluno') {
-         // Se for aluno, redireciona para o home.php
+         // Insere os dados na tabela users se ainda não estiverem lá
+         $check_existing_user = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
+         $check_existing_user->execute([$row['id']]);
+         if ($check_existing_user->rowCount() == 0) {
+            $insert_user = $conn->prepare("INSERT INTO `users` (id, name, email, password, image) VALUES (?, ?, '', '', '')");
+            $insert_user->execute([$row['id'], $ra]);
+         }
+         // Define o cookie de usuário
+         setcookie('user_id', $row['id'], time() + 60*60*24*30, '/');
+         // Redireciona para home.php
          header('location: home.php');
-      } elseif ($row['funcao'] == 'professor') {
-         // Se for professor, redireciona para o dashboard.php
-         header('location: admin/dashboard.php');
+         exit;
       }
-      exit; // Adicionando exit para garantir que o script seja interrompido após o redirecionamento
+      // Redireciona para dashboard.php se for professor
+      elseif ($row['funcao'] == 'professor') {
+         header('location: admin/dashboard.php');
+         exit;
+      }
    } else {
       $message[] = 'RA ou data de nascimento incorretos';
    }

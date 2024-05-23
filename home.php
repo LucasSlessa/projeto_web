@@ -68,7 +68,7 @@ $total_bookmarked = $select_bookmark->rowCount();
          <h3 class="title">porfavor faça login</h3>
           <div class="flex-btn" style="padding-top: .5rem;">
             <a href="login.php" class="option-btn">login</a>
-            <a href="register.php" class="option-btn">registre-se</a>
+            
          </div>
       </div>
       <?php
