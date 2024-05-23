@@ -40,19 +40,12 @@ if(isset($message)){
          <h3><?= $fetch_profile['name']; ?></h3>
          <span>estudante</span>
          <a href="profile.php" class="btn">visualizar perfil</a>
-         <div class="flex-btn">
-            <a href="login.php" class="option-btn">login</a>
-            <a href="register.php" class="option-btn">registro</a>
-         </div>
+        
          <a href="components/user_logout.php" onclick="return confirm('logout from this website?');" class="delete-btn">logout</a>
          <?php
             }else{
          ?>
-         <h3>login ou registre-se</h3>
-          <div class="flex-btn">
-            <a href="login.php" class="option-btn">login</a>
-            <a href="register.php" class="option-btn">registro</a>
-         </div>
+         
          <?php
             }
          ?>
@@ -86,11 +79,7 @@ if(isset($message)){
          <?php
             }else{
          ?>
-         <h3>login ou registre-se</h3>
-          <div class="flex-btn" style="padding-top: .5rem;">
-            <a href="login.php" class="option-btn">login</a>
-            <a href="register.php" class="option-btn">register</a>
-         </div>
+         
          <?php
             }
          ?>

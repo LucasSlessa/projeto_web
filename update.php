@@ -15,17 +15,16 @@ if(isset($_POST['submit'])){
    $select_user->execute([$user_id]);
    $fetch_user = $select_user->fetch(PDO::FETCH_ASSOC);
 
-   $prev_pass = $fetch_user['password'];
    $prev_image = $fetch_user['image'];
 
    $name = $_POST['name'];
    $name = filter_var($name, FILTER_SANITIZE_SPECIAL_CHARS);
 
-  if(!empty($name)){
-   $update_name = $conn->prepare("UPDATE `users` SET name = ? WHERE id = ?");
-   $update_name->execute([$name, $user_id]);
-   $message[] = 'username updated successfully!';
-  }
+   if(!empty($name)){
+      $update_name = $conn->prepare("UPDATE `users` SET name = ? WHERE id = ?");
+      $update_name->execute([$name, $user_id]);
+      $message[] = 'username updated successfully!';
+   }
 
    $email = $_POST['email'];
    $email = filter_var($email, FILTER_SANITIZE_SPECIAL_CHARS);
@@ -34,11 +33,11 @@ if(isset($_POST['submit'])){
       $select_email = $conn->prepare("SELECT email FROM `users` WHERE email = ?");
       $select_email->execute([$email]);
       if($select_email->rowCount() > 0){
-         $message[] = 'email already taken!';
+         $message[] = 'email ja existe!';
       }else{
          $update_email = $conn->prepare("UPDATE `users` SET email = ? WHERE id = ?");
          $update_email->execute([$email, $user_id]);
-         $message[] = 'email updated successfully!';
+         $message[] = 'Email atualizado com sucesso!';
       }
    }
 
@@ -52,7 +51,7 @@ if(isset($_POST['submit'])){
 
    if(!empty($image)){
       if($image_size > 2000000){
-         $message[] = 'image size too large!';
+         $message[] = 'imagem muito grande!';
       }else{
          $update_image = $conn->prepare("UPDATE `users` SET `image` = ? WHERE id = ?");
          $update_image->execute([$rename, $user_id]);
@@ -60,33 +59,11 @@ if(isset($_POST['submit'])){
          if($prev_image != '' AND $prev_image != $rename){
             unlink('uploaded_files/'.$prev_image);
          }
-         $message[] = 'image updated successfully!';
+         $message[] = 'Imagem atualizada com sucesso!';
       }
    }
 
-   $empty_pass = 'da39a3ee5e6b4b0d3255bfef95601890afd80709';
-   $old_pass = sha1($_POST['old_pass']);
-   $old_pass = filter_var($old_pass, FILTER_SANITIZE_SPECIAL_CHARS);
-   $new_pass = sha1($_POST['new_pass']);
-   $new_pass = filter_var($new_pass, FILTER_SANITIZE_SPECIAL_CHARS);
-   $cpass = sha1($_POST['cpass']);
-   $cpass = filter_var($cpass, FILTER_SANITIZE_SPECIAL_CHARS);
-
-   if($old_pass != $empty_pass){
-      if($old_pass != $prev_pass){
-         $message[] = 'senhas diferentes!';
-      }elseif($new_pass != $cpass){
-         $message[] = 'confirme suas senhas!';
-      }else{
-         if($new_pass != $empty_pass){
-            $update_pass = $conn->prepare("UPDATE `users` SET password = ? WHERE id = ?");
-            $update_pass->execute([$cpass, $user_id]);
-            $message[] = 'senha atualizada com sucesso!';
-         }else{
-            $message[] = 'insira uma nova senha!';
-         }
-      }
-   }
+   // Password checks removed
 
 }
 
@@ -124,14 +101,7 @@ if(isset($_POST['submit'])){
             <p>atualizar foto</p>
             <input type="file" name="image" accept="image/*" class="box">
          </div>
-         <div class="col">
-               <p>senha antiga</p>
-               <input type="password" name="old_pass" placeholder="digite sua antiga senha" maxlength="50" class="box">
-               <p>nova senha</p>
-               <input type="password" name="new_pass" placeholder="digite sua nova senha" maxlength="50" class="box">
-               <p>confirmar senha</p>
-               <input type="password" name="cpass" placeholder="confirme sua senha" maxlength="50" class="box">
-         </div>
+         
       </div>
       <input type="submit" name="submit" value="atualizar" class="btn">
    </form>
@@ -139,18 +109,6 @@ if(isset($_POST['submit'])){
 </section>
 
 <!-- update profile section ends -->
-
-
-
-
-
-
-
-
-
-
-
-
 
 <?php include 'components/footer.php'; ?>
 

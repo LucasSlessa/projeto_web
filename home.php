@@ -65,7 +65,7 @@ $total_bookmarked = $select_bookmark->rowCount();
          }else{ 
       ?>
       <div class="box" style="text-align: center;">
-         <h3 class="title">porfavor registre-se ou login</h3>
+         <h3 class="title">porfavor faça login</h3>
           <div class="flex-btn" style="padding-top: .5rem;">
             <a href="login.php" class="option-btn">login</a>
             <a href="register.php" class="option-btn">registre-se</a>
@@ -101,11 +101,6 @@ $total_bookmarked = $select_bookmark->rowCount();
          </div>
       </div>
 
-      <div class="box tutor">
-         <h3 class="title">Torne-se um tutor</h3>
-         <p>Tutores sao responsaveis por enviar os tcc's de seus alunos</p>
-         <a href="admin/register.php" class="inline-btn">começar</a>
-      </div>
 
    </div>
 
