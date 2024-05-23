@@ -22,20 +22,23 @@ if (isset($_POST['submit'])) {
    $image_tmp_name = $_FILES['image']['tmp_name'];
    $image_folder = 'uploaded_files/' . $rename;
 
-   // Verificação de email duplicado
-   $select_email = $conn->prepare("SELECT * FROM `users` WHERE email = ?");
-   $select_email->execute([$email]);
+   $ra = $_POST['ra'];
+   $funcao = $_POST['funcao'];
+   $cpf = $_POST['cpf'];
 
-   if ($select_email->rowCount() > 0) {
-      $message[] = 'Email já está em uso!';
-   } else {
+   $select_validation = $conn->prepare("SELECT * FROM `users_validation` WHERE ra = ? AND funcao = ? AND cpf = ?");
+   $select_validation->execute([$ra, $funcao, $cpf]);
+
+   if ($select_validation->rowCount() > 0) {
       $insert_user = $conn->prepare("INSERT INTO `users`(id, name, email, password, image) VALUES(?,?,?,?,?)");
       $insert_user->execute([$id, $name, $email, $pass, $rename]);
       move_uploaded_file($image_tmp_name, $image_folder);
-
+      
       // Redirect to login page after successful registration
       header('location: login.php');
       exit;
+   } else {
+      $message[] = 'Validação de CPF, função e RA falhou!';
    }
 }
 ?>
@@ -80,7 +83,7 @@ if (isset($_POST['submit'])) {
       <p>selecionar foto <span>*</span></p>
       <input type="file" name="image" accept="image/*" required class="box">
       <p class="link">ja possui uma conta? <a href="login.php">faça login</a></p>
-      <input type="submit" name="submit" value="registrar"a class="btn">
+      <input type="submit" name="submit" value="registrar" class="btn">
    </form>
 
 </section>

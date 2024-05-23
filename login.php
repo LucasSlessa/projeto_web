@@ -8,27 +8,26 @@ if (isset($_COOKIE['user_id'])) {
 }
 
 if (isset($_POST['submit'])) {
+   $ra = filter_var($_POST['ra'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+   $nascimento = $_POST['nascimento'];
 
-   $email = $_POST['email'];
-   $email = filter_var($_POST['email'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-   $password = $_POST['pass'];
-
-   $select_user = $conn->prepare("SELECT * FROM `users` WHERE email = ? LIMIT 1");
-   $select_user->execute([$email]);
+   $select_user = $conn->prepare("SELECT * FROM `users_validation` WHERE ra = ? LIMIT 1");
+   $select_user->execute([$ra]);
    $row = $select_user->fetch(PDO::FETCH_ASSOC);
-   
-   if ($select_user->rowCount() > 0 && password_verify($password, $row['password'])) {
+
+   if ($select_user->rowCount() > 0 && $nascimento == $row['nascimento']) {
       setcookie('user_id', $row['id'], time() + 60*60*24*30, '/');
-      header('location: home.php');
+      if ($row['funcao'] == 'aluno') {
+         header('location: home.php');
+      } elseif ($row['funcao'] == 'professor') {
+         header('location: admin/dashboard.php');
+      }
       exit; // Adicionando exit para garantir que o script seja interrompido após o redirecionamento
    } else {
-      $message[] = 'senha ou email incorretos';
+      $message[] = 'RA ou data de nascimento incorretos';
    }
-
-  
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +35,7 @@ if (isset($_POST['submit'])) {
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>home</title>
+   <title>Login</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -53,12 +52,11 @@ if (isset($_POST['submit'])) {
 
    <form action="" method="post" enctype="multipart/form-data" class="login">
       <h3>Bem vindo de volta!</h3>
-      <p>seu email <span>*</span></p>
-      <input type="email" name="email" placeholder="digite seu email" maxlength="50" required class="box">
-      <p>sua senha <span>*</span></p>
-      <input type="password" name="pass" placeholder="digite sua senha" maxlength="20" required class="box">
-      <p class="link">não possui uma conta? <a href="register.php">registre-se agora</a></p>
-      <input type="submit" name="submit" value="login now" class="btn">
+      <p>Seu RA <span>*</span></p>
+      <input type="text" name="ra" placeholder="Digite seu RA" maxlength="20" required class="box">
+      <p>Data de nascimento <span>*</p>
+      <input type="password" name="nascimento" placeholder="DDMMYYYY" maxlength="8" required class="box">
+      <input type="submit" name="submit" value="Login" class="btn">
    </form>
 
 </section>

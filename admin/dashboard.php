@@ -82,13 +82,7 @@ $total_comments = $select_comments->rowCount();
          <a href="comments.php" class="btn">ver comentarios</a>
       </div>
 
-      <div class="box">
-         <h3>Seleção rapida</h3>
-         <p>login ou registro</p>
-         <div class="flex-btn">
-            <a href="login.php" class="option-btn">login</a>
-            <a href="register.php" class="option-btn">registrar</a>
-         </div>
+      
       </div>
 
    </div>

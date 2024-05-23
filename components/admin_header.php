@@ -18,7 +18,7 @@ if(isset($message)){
       <a href="dashboard.php" class="logo">Admin.</a>
 
       <form action="search_page.php" method="post" class="search-form">
-         <input type="text" name="search" placeholder="search here..." required maxlength="100">
+         <input type="text" name="search" placeholder="Pesquisar..." required maxlength="100">
          <button type="submit" class="fas fa-search" name="search_btn"></button>
       </form>
 
@@ -44,7 +44,7 @@ if(isset($message)){
             <a href="login.php" class="option-btn">login</a>
             <a href="register.php" class="option-btn">registro</a>
          </div>
-         <a href="../components/admin_logout.php" onclick="return confirm('logout from this website?');" class="delete-btn">logout</a>
+         <a href="../components/admin_logout.php" onclick="return confirm('Deseja se Deslogar?');" class="delete-btn">logout</a>
          <?php
             }else{
          ?>
