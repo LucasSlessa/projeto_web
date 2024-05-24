@@ -120,7 +120,7 @@ if(isset($_POST['delete_video'])){
 
 <section class="contents">
 
-   <h1 class="heading">playlist de videos</h1>
+   <h1 class="heading">playlist de Projetos</h1>
 
    <div class="box-container">
 
@@ -141,14 +141,14 @@ if(isset($_POST['delete_video'])){
          <form action="" method="post" class="flex-btn">
             <input type="hidden" name="video_id" value="<?= $video_id; ?>">
             <a href="update_content.php?get_id=<?= $video_id; ?>" class="option-btn">atualizar</a>
-            <input type="submit" value="delete" class="delete-btn" onclick="return confirm('delete this video?');" name="delete_video">
+            <input type="submit" value="delete" class="delete-btn" onclick="return confirm('deletar esse projeto  ?');" name="delete_video">
          </form>
-         <a href="view_content.php?get_id=<?= $video_id; ?>" class="btn">assistir video</a>
+         <a href="view_content.php?get_id=<?= $video_id; ?>" class="btn">Visualizar Projeto</a>
       </div>
    <?php
          }
       }else{
-         echo '<p class="empty">nenhum video adicionado ainda! <a href="add_content.php" class="btn" style="margin-top: 1.5rem;">add videos</a></p>';
+         echo '<p class="empty">nenhum Projeto adicionado ainda! <a href="add_content.php" class="btn" style="margin-top: 1.5rem;">Adicionar Projetos</a></p>';
       }
    ?>
 

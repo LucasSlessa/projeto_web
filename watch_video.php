@@ -119,7 +119,7 @@ if(isset($_POST['update_now'])){
    }else{
       $update_comment = $conn->prepare("UPDATE `comments` SET comment = ? WHERE id = ?");
       $update_comment->execute([$update_box, $update_id]);
-      $message[] = 'comentario !';
+      $message[] = 'comentario atualizado!';
    }
 
 }
@@ -222,7 +222,8 @@ if(isset($_POST['update_now'])){
          <?php
             }
          ?>
-      </form>z
+      </form>
+      <a href="uploaded_files/<?= $fetch_content['project_folder']; ?>" download class="inline-btn">Baixar Projeto</a>
       <div class="description"><p><?= $fetch_content['description']; ?></p></div>
    </div>
    <?php
@@ -240,8 +241,7 @@ if(isset($_POST['update_now'])){
 
 <section class="comments">
 
-   <h1 class="heading">adicionar comentarios
-   </h1>
+   <h1 class="heading">adicionar comentarios</h1>
 
    <form action="" method="post" class="add-comment">
       <input type="hidden" name="content_id" value="<?= $get_id; ?>">
@@ -251,7 +251,6 @@ if(isset($_POST['update_now'])){
 
    <h1 class="heading">comentarios dos usuarios</h1>
 
-   
    <div class="show-comments">
       <?php
          $select_comments = $conn->prepare("SELECT * FROM `comments` WHERE content_id = ?");
@@ -289,18 +288,11 @@ if(isset($_POST['update_now'])){
          echo '<p class="empty">nenhum comentario!</p>';
       }
       ?>
-      </div>
+   </div>
    
 </section>
 
 <!-- comments section ends -->
-
-
-
-
-
-
-
 
 <?php include 'components/footer.php'; ?>
 

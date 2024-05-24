@@ -16,6 +16,7 @@ if(isset($_POST['submit'])){
    $description = filter_var($_POST['description'], FILTER_SANITIZE_SPECIAL_CHARS);
    $playlist = filter_var($_POST['playlist'], FILTER_SANITIZE_SPECIAL_CHARS);
 
+   // Process thumbnail
    $thumb = $_FILES['thumb']['name'];
    $thumb = filter_var($thumb, FILTER_SANITIZE_SPECIAL_CHARS);
    $thumb_ext = pathinfo($thumb, PATHINFO_EXTENSION);
@@ -24,6 +25,7 @@ if(isset($_POST['submit'])){
    $thumb_tmp_name = $_FILES['thumb']['tmp_name'];
    $thumb_folder = '../uploaded_files/'.$rename_thumb;
 
+   // Process video
    $video = $_FILES['video']['name'];
    $video = filter_var($video, FILTER_SANITIZE_SPECIAL_CHARS);
    $video_ext = pathinfo($video, PATHINFO_EXTENSION);
@@ -31,20 +33,27 @@ if(isset($_POST['submit'])){
    $video_tmp_name = $_FILES['video']['tmp_name'];
    $video_folder = '../uploaded_files/'.$rename_video;
 
+   // Process project folder (zip file)
+   $project_zip = $_FILES['project_zip']['name'];
+   $project_zip = filter_var($project_zip, FILTER_SANITIZE_SPECIAL_CHARS);
+   $zip_ext = pathinfo($project_zip, PATHINFO_EXTENSION);
+   $rename_zip = unique_id().'.'.$zip_ext;
+   $zip_tmp_name = $_FILES['project_zip']['tmp_name'];
+   $zip_folder = '../uploaded_files/'.$rename_zip;
+
    if($thumb_size > 2000000){
       $message[] = 'imagem muito grande!';
    }else{
-      $add_playlist = $conn->prepare("INSERT INTO `content`(id, tutor_id, playlist_id, title, description, video, thumb, status) VALUES(?,?,?,?,?,?,?,?)");
-      $add_playlist->execute([$id, $tutor_id, $playlist, $title, $description, $rename_video, $rename_thumb, $status]);
+      $add_playlist = $conn->prepare("INSERT INTO `content`(id, tutor_id, playlist_id, title, description, video, thumb, status, project_folder) VALUES(?,?,?,?,?,?,?,?,?)");
+      $add_playlist->execute([$id, $tutor_id, $playlist, $title, $description, $rename_video, $rename_thumb, $status, $rename_zip]);
       move_uploaded_file($thumb_tmp_name, $thumb_folder);
       move_uploaded_file($video_tmp_name, $video_folder);
+      move_uploaded_file($zip_tmp_name, $zip_folder);
       $message[] = 'novo projeto enviado!';
    }
-
 }
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -53,22 +62,15 @@ if(isset($_POST['submit'])){
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Dashboard</title>
-
-   <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-
-   <!-- custom css file link  -->
    <link rel="stylesheet" href="../css/admin_style.css">
-
 </head>
 <body>
 
 <?php include '../components/admin_header.php'; ?>
-   
+
 <section class="video-form">
-
    <h1 class="heading">Enviar Projeto</h1>
-
    <form action="" method="post" enctype="multipart/form-data">
       <p>status <span>*</span></p>
       <select name="status" class="box" required>
@@ -101,30 +103,15 @@ if(isset($_POST['submit'])){
       </select>
       <p>thumbnail<span>*</span></p>
       <input type="file" name="thumb" accept="image/*" required class="box">
-      z<p>video <span>*</span></p>
+      <p>video <span>*</span></p>
       <input type="file" name="video" accept="video/*" required class="box">
+      <p>Project Zip <span>*</span></p>
+      <input type="file" name="project_zip" accept=".zip" required class="box">
       <input type="submit" value="enviar projeto" name="submit" class="btn">
    </form>
-
 </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php include '../components/footer.php'; ?>
-
 <script src="../js/admin_script.js"></script>
-
 </body>
 </html>
