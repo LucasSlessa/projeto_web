@@ -2,6 +2,7 @@
 
 include '../components/connect.php';
 
+// Verifica se o tutor está autenticado
 if(isset($_COOKIE['tutor_id'])){
    $tutor_id = $_COOKIE['tutor_id'];
 }else{
@@ -9,6 +10,7 @@ if(isset($_COOKIE['tutor_id'])){
    header('location:login.php');
 }
 
+// Obtém o ID do vídeo a ser atualizado
 if(isset($_GET['get_id'])){
    $get_id = $_GET['get_id'];
 }else{
@@ -16,104 +18,78 @@ if(isset($_GET['get_id'])){
    header('location:dashboard.php');
 }
 
+// Tratamento do formulário de atualização
 if(isset($_POST['update'])){
+   $status = filter_var($_POST['status'], FILTER_SANITIZE_SPECIAL_CHARS);
+   $title = filter_var($_POST['title'], FILTER_SANITIZE_SPECIAL_CHARS);
+   $description = filter_var($_POST['description'], FILTER_SANITIZE_SPECIAL_CHARS);
+   $playlist = filter_var($_POST['playlist'], FILTER_SANITIZE_SPECIAL_CHARS);
 
-   $video_id = $_POST['video_id'];
-   $video_id = filter_var($video_id,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-   $status = $_POST['status'];
-   $status = filter_var($status,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-   $title = $_POST['title'];
-   $title = filter_var($title,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-   $description = $_POST['description'];
-   $description = filter_var($description,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-   $playlist = $_POST['playlist'];
-   $playlist = filter_var($playlist,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+   // Atualização dos arquivos ZIP, thumbnail e vídeo, se enviados
+   $zip_folder = '../uploaded_files/';
 
-   $update_content = $conn->prepare("UPDATE `content` SET title = ?, description = ?, status = ? WHERE id = ?");
-   $update_content->execute([$title, $description, $status, $video_id]);
+   // Atualiza o caminho do arquivo ZIP no banco de dados, se enviado
+   if(isset($_FILES['new_zip']) && $_FILES['new_zip']['error'] === UPLOAD_ERR_OK){
+      $old_zip_file = $_POST['old_zip_file'];
 
-   if(!empty($playlist)){
-      $update_playlist = $conn->prepare("UPDATE `content` SET playlist_id = ? WHERE id = ?");
-      $update_playlist->execute([$playlist, $video_id]);
-   }
-
-   $old_thumb = $_POST['old_thumb'];
-   $old_thumb = filter_var($old_thumb, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-   $thumb = $_FILES['thumb']['name'];
-   $thumb = filter_var($thumb, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-   $thumb_ext = pathinfo($thumb, PATHINFO_EXTENSION);
-   $rename_thumb = unique_id().'.'.$thumb_ext;
-   $thumb_size = $_FILES['thumb']['size'];
-   $thumb_tmp_name = $_FILES['thumb']['tmp_name'];
-   $thumb_folder = '../uploaded_files/'.$rename_thumb;
-
-   if(!empty($thumb)){
-      if($thumb_size > 2000000){
-         $message[] = 'image size is too large!';
-      }else{
-         $update_thumb = $conn->prepare("UPDATE `content` SET thumb = ? WHERE id = ?");
-         $update_thumb->execute([$rename_thumb, $video_id]);
-         move_uploaded_file($thumb_tmp_name, $thumb_folder);
-         if($old_thumb != '' AND $old_thumb != $rename_thumb && file_exists('../uploaded_files/'.$old_thumb)){
-            unlink('../uploaded_files/'.$old_thumb);
-         }
+      // Remove o arquivo ZIP antigo, se existir
+      if(file_exists($zip_folder.$old_zip_file)){
+         unlink($zip_folder.$old_zip_file);
       }
+
+      // Upload do novo arquivo ZIP
+      $new_zip_name = $_FILES['new_zip']['name'];
+      move_uploaded_file($_FILES['new_zip']['tmp_name'], $zip_folder.$new_zip_name);
+
+      // Atualiza o caminho do arquivo ZIP no banco de dados
+      $update_zip = $conn->prepare("UPDATE `content` SET project_folder = ? WHERE id = ?");
+      $update_zip->execute([$new_zip_name, $get_id]);
    }
 
-   $old_video = $_POST['old_video'];
-   $old_video = filter_var($old_video, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-   $video = $_FILES['video']['name'];
-   $video = filter_var($video, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-   $video_ext = pathinfo($video, PATHINFO_EXTENSION);
-   $rename_video = unique_id().'.'.$video_ext;
-   $video_tmp_name = $_FILES['video']['tmp_name'];
-   $video_folder = '../uploaded_files/'.$rename_video;
+   // Atualiza o status, título e descrição do vídeo no banco de dados
+   $update_video = $conn->prepare("UPDATE `content` SET status = ?, title = ?, description = ?, playlist_id = ? WHERE id = ?");
+   $update_video->execute([$status, $title, $description, $playlist, $get_id]);
 
-   if(!empty($video)){
-      $update_video = $conn->prepare("UPDATE `content` SET video = ? WHERE id = ?");
-      $update_video->execute([$rename_video, $video_id]);
-      move_uploaded_file($video_tmp_name, $video_folder);
-      if($old_video != '' AND $old_video != $rename_video && file_exists('../uploaded_files/'.$old_video)){
-         unlink('../uploaded_files/'.$old_video);
+   // Atualização do thumbnail, se enviado
+   if(isset($_FILES['thumb']) && $_FILES['thumb']['error'] === UPLOAD_ERR_OK){
+      $old_thumb = $_POST['old_thumb'];
+
+      // Remove o thumbnail antigo, se existir
+      if(file_exists($zip_folder.$old_thumb)){
+         unlink($zip_folder.$old_thumb);
       }
+
+      // Upload do novo thumbnail
+      $new_thumb_name = $_FILES['thumb']['name'];
+      move_uploaded_file($_FILES['thumb']['tmp_name'], $zip_folder.$new_thumb_name);
+
+      // Atualiza o nome do thumbnail no banco de dados
+      $update_thumb = $conn->prepare("UPDATE `content` SET thumb = ? WHERE id = ?");
+      $update_thumb->execute([$new_thumb_name, $get_id]);
    }
 
-   $message[] = 'conteudo atualizado!';
+   // Atualização do vídeo, se enviado
+   if(isset($_FILES['video']) && $_FILES['video']['error'] === UPLOAD_ERR_OK){
+      $old_video = $_POST['old_video'];
 
-}
+      // Remove o vídeo antigo, se existir
+      if(file_exists($zip_folder.$old_video)){
+         unlink($zip_folder.$old_video);
+      }
 
-if(isset($_POST['delete_video'])){
+      // Upload do novo vídeo
+      $new_video_name = $_FILES['video']['name'];
+      move_uploaded_file($_FILES['video']['tmp_name'], $zip_folder.$new_video_name);
 
-   $delete_id = $_POST['video_id'];
-   $delete_id = filter_var($delete_id, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-   $delete_video_thumb = $conn->prepare("SELECT thumb FROM `content` WHERE id = ? LIMIT 1");
-   $delete_video_thumb->execute([$delete_id]);
-   $fetch_thumb = $delete_video_thumb->fetch(PDO::FETCH_ASSOC);
-   if(file_exists('../uploaded_files/'.$fetch_thumb['thumb'])){
-      unlink('../uploaded_files/'.$fetch_thumb['thumb']);
+      // Atualiza o nome do vídeo no banco de dados
+      $update_video_file = $conn->prepare("UPDATE `content` SET video = ? WHERE id = ?");
+      $update_video_file->execute([$new_video_name, $get_id]);
    }
 
-   $delete_video = $conn->prepare("SELECT video FROM `content` WHERE id = ? LIMIT 1");
-   $delete_video->execute([$delete_id]);
-   $fetch_video = $delete_video->fetch(PDO::FETCH_ASSOC);
-   if(file_exists('../uploaded_files/'.$fetch_video['video'])){
-      unlink('../uploaded_files/'.$fetch_video['video']);
-   }
-
-   $delete_likes = $conn->prepare("DELETE FROM `likes` WHERE content_id = ?");
-   $delete_likes->execute([$delete_id]);
-   $delete_comments = $conn->prepare("DELETE FROM `comments` WHERE content_id = ?");
-   $delete_comments->execute([$delete_id]);
-
-   $delete_content = $conn->prepare("DELETE FROM `content` WHERE id = ?");
-   $delete_content->execute([$delete_id]);
-   header('location:contents.php');
-    
+   // Mensagem de sucesso...
 }
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -147,8 +123,9 @@ if(isset($_POST['delete_video'])){
    ?>
    <form action="" method="post" enctype="multipart/form-data">
       <input type="hidden" name="video_id" value="<?= $fecth_videos['id']; ?>">
-      <input type="hidden" name="old_thumb" val ue="<?= $fecth_videos['thumb']; ?>">
+      <input type="hidden" name="old_thumb" value="<?= $fecth_videos['thumb']; ?>">
       <input type="hidden" name="old_video" value="<?= $fecth_videos['video']; ?>">
+      <input type="hidden" name="old_zip_file" value="<?= $fecth_videos['project_folder']; ?>">
       <p>atualizar status <span>*</span></p>
       <select name="status" class="box" required>
          <option value="<?= $fecth_videos['status']; ?>" selected><?= $fecth_videos['status']; ?></option>
@@ -184,6 +161,8 @@ if(isset($_POST['delete_video'])){
       <video src="../uploaded_files/<?= $fecth_videos['video']; ?>" controls></video>
       <p>atualizar video</p>
       <input type="file" name="video" accept="video/*" class="box">
+      <p>atualizar arquivo ZIP</p>
+      <input type="file" name="new_zip" accept=".zip" class="box">
       <input type="submit" value="Atualizar projeto" name="update" class="btn">
       <div class="flex-btn">
          <a href="view_content.php?get_id=<?= $video_id; ?>" class="option-btn">ver conteudo</a>
@@ -206,3 +185,4 @@ if(isset($_POST['delete_video'])){
 
 </body>
 </html>
+
