@@ -42,11 +42,7 @@ if(isset($_COOKIE['user_id'])){
 
    <div class="box-container">
 
-      <div class="box offer">
-         <h3>Torne-se um tutor</h3>
-         <p>Faça parte da comunidade e envie projetos de seus alunos.</p>
-         <a href="admin/register.php" class="inline-btn">Começar</a>
-      </div>
+      
 
       <?php
          $select_tutors = $conn->prepare("SELECT * FROM `tutors`");

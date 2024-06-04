@@ -28,11 +28,11 @@ if(isset($_POST['save_list'])){
       if($select_list->rowCount() > 0){
          $remove_bookmark = $conn->prepare("DELETE FROM `bookmark` WHERE user_id = ? AND playlist_id = ?");
          $remove_bookmark->execute([$user_id, $list_id]);
-         $message[] = 'playlist removida!';
+         $message[] = 'Curso Removido!';
       }else{
          $insert_bookmark = $conn->prepare("INSERT INTO `bookmark`(user_id, playlist_id) VALUES(?,?)");
          $insert_bookmark->execute([$user_id, $list_id]);
-         $message[] = 'playlist salva!';
+         $message[] = 'Curso salvo!';
       }
 
    }else{
@@ -49,7 +49,7 @@ if(isset($_POST['save_list'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>playlists</title>
+   <title>Cursos</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -66,7 +66,7 @@ if(isset($_POST['save_list'])){
 
 <section class="playlist">
 
-   <h1 class="heading">detalhes das playlists</h1>
+   <h1 class="heading">Detalhes dos Cursos</h1>
 
    <div class="row">
 
@@ -107,7 +107,7 @@ if(isset($_POST['save_list'])){
             ?>
          </form>
          <div class="thumb">
-            <span><?= $total_videos; ?> videos</span>
+            <span><?= $total_videos; ?> Projetos</span>
             <img src="uploaded_files/<?= $fetch_playlist['thumb']; ?>" alt="">
          </div>
       </div>
@@ -129,7 +129,7 @@ if(isset($_POST['save_list'])){
 
       <?php
          }else{
-            echo '<p class="empty">this playlist was not found!</p>';
+            echo '<p class="empty">Playlist nao encontrada!</p>';
          }  
       ?>
 
@@ -161,7 +161,7 @@ if(isset($_POST['save_list'])){
       <?php
             }
          }else{
-            echo '<p class="empty">sem videos ainda!</p>';
+            echo '<p class="empty">sem Projetos ainda!</p>';
          }
       ?>
 

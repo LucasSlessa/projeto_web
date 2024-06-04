@@ -51,7 +51,7 @@ $total_bookmarked = $select_bookmark->rowCount();
       <div class="user">
          <img src="uploaded_files/<?= $fetch_profile['image']; ?>" alt="">
          <h3><?= $fetch_profile['name']; ?></h3>
-         <p>estudante</p>
+         <p>Estudante</p>
          <a href="update.php" class="inline-btn">atualizar perfil</a>
       </div>
 
@@ -62,10 +62,10 @@ $total_bookmarked = $select_bookmark->rowCount();
                <i class="fas fa-bookmark"></i>
                <div>
                   <h3><?= $total_bookmarked; ?></h3>
-                  <span>playlists salvas</span>
+                  <span>cursos salvas</span>
                </div>
             </div>
-            <a href="playlist.php" class="inline-btn">ver playlists</a>
+            <a href="playlist.php" class="inline-btn">ver Cursos</a>
          </div>
 
          <div class="box">

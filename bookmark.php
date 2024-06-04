@@ -32,7 +32,7 @@ if(isset($_COOKIE['user_id'])){
 
 <section class="courses">
 
-   <h1 class="heading">playlists favoritas</h1>
+   <h1 class="heading">Cursos favoritos</h1>
 
    <div class="box-container">
 

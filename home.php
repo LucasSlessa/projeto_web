@@ -28,7 +28,7 @@ $total_bookmarked = $select_bookmark->rowCount();
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>home</title>
+   <title>Inicio</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -45,7 +45,7 @@ $total_bookmarked = $select_bookmark->rowCount();
 
 <section class="quick-select">
 
-   <h1 class="heading">opçoes</h1>
+   <h1 class="heading">Opçoes</h1>
 
    <div class="box-container">
 
@@ -53,12 +53,12 @@ $total_bookmarked = $select_bookmark->rowCount();
          if($user_id != ''){
       ?>
       <div class="box">
-         <h3 class="title">likes e comentarios</h3>
-         <p>total de likes : <span><?= $total_likes; ?></span></p>
+         <h3 class="title">Likes e comentarios</h3>
+         <p>Total de likes : <span><?= $total_likes; ?></span></p>
          <a href="likes.php" class="inline-btn">ver likes</a>
-         <p>total de comentarios : <span><?= $total_comments; ?></span></p>
+         <p>Total de comentarios : <span><?= $total_comments; ?></span></p>
          <a href="comments.php" class="inline-btn">ver comentarios</a>
-         <p>playlists salvas : <span><?= $total_bookmarked; ?></span></p>
+         <p>Cursos salvas : <span><?= $total_bookmarked; ?></span></p>
          <a href="bookmark.php" class="inline-btn">ver favoritos</a>
       </div>
       <?php
@@ -137,7 +137,7 @@ $total_bookmarked = $select_bookmark->rowCount();
          </div>
          <img src="uploaded_files/<?= $fetch_course['thumb']; ?>" class="thumb" alt="">
          <h3 class="title"><?= $fetch_course['title']; ?></h3>
-         <a href="playlist.php?get_id=<?= $course_id; ?>" class="inline-btn">visualizar playlist</a>
+         <a href="playlist.php?get_id=<?= $course_id; ?>" class="inline-btn">visualizar Curso</a>
       </div>
       <?php
          }

@@ -210,11 +210,11 @@ if(isset($_POST['update_now'])){
       </div>
       <form action="" method="post" class="flex">
          <input type="hidden" name="content_id" value="<?= $content_id; ?>">
-         <a href="playlist.php?get_id=<?= $fetch_content['playlist_id']; ?>" class="inline-btn">ver playlist</a>
+         <a href="playlist.php?get_id=<?= $fetch_content['playlist_id']; ?>" class="inline-btn">ver Curso</a>
          <?php
             if($verify_likes->rowCount() > 0){
          ?>
-         <button type="submit" name="like_content"><i class="fas fa-heart"></i><span>liked</span></button>
+         <button type="submit" name="like_content"><i class="fas fa-heart"></i><span>marcado como gostei</span></button>
          <?php
          }else{
          ?>
@@ -241,15 +241,15 @@ if(isset($_POST['update_now'])){
 
 <section class="comments">
 
-   <h1 class="heading">adicionar comentarios</h1>
+   <h1 class="heading">Adicionar comentarios</h1>
 
    <form action="" method="post" class="add-comment">
       <input type="hidden" name="content_id" value="<?= $get_id; ?>">
-      <textarea name="comment_box" required placeholder="write your comment..." maxlength="1000" cols="30" rows="10"></textarea>
-      <input type="submit" value="add comment" name="add_comment" class="inline-btn">
+      <textarea name="comment_box" required placeholder="escreva seu comentario..." maxlength="1000" cols="30" rows="10"></textarea>
+      <input type="submit" value="Comentar" name="add_comment" class="inline-btn">
    </form>
 
-   <h1 class="heading">comentarios dos usuarios</h1>
+   <h1 class="heading">Comentarios dos usuarios</h1>
 
    <div class="show-comments">
       <?php
@@ -275,8 +275,8 @@ if(isset($_POST['update_now'])){
          ?>
          <form action="" method="post" class="flex-btn">
             <input type="hidden" name="comment_id" value="<?= $fetch_comment['id']; ?>">
-            <button type="submit" name="edit_comment" class="inline-option-btn">editar comentario</button>
-            <button type="submit" name="delete_comment" class="inline-delete-btn" onclick="return confirm('delete this comment?');">deletar comentario</button>
+            <button type="submit" name="edit_comment" class="inline-option-btn">Editar comentario</button>
+            <button type="submit" name="delete_comment" class="inline-delete-btn" onclick="return confirm('Deletar este comentario?');">Deletar comentario</button>
          </form>
          <?php
          }
