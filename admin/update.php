@@ -131,33 +131,33 @@ if(isset($_POST['submit'])){
             <p>profissão</p>
             <select name="profession" class="box">
                <option value="" selected><?= $fetch_profile['profession']; ?></option>
-               <option value="developer">developer</option>
-               <option value="desginer">desginer</option>
-               <option value="musician">musician</option>
-               <option value="biologist">biologist</option>
-               <option value="teacher">teacher</option>
-               <option value="engineer">engineer</option>
-               <option value="lawyer">lawyer</option>
-               <option value="accountant">accountant</option>
-               <option value="doctor">doctor</option>
-               <option value="journalist">journalist</option>
-               <option value="photographer">photographer</option>
+               <option value="developer">Desenvolvimento</option>
+               <option value="desginer">Arquitetrua</option>
+               <option value="musician">musica</option>
+               <option value="biologist">biologia</option>
+               <option value="teacher">Engenharia</option>
+               <option value="engineer">Advocacia</option>
+               <option value="lawyer">Astrofisica</option>
+               <option value="accountant">Economia</option>
+               <option value="doctor">Veterinaria</option>
+               <option value="journalist">jornalista</option>
+               <option value="photographer">Cinema</option>
             </select>
-            <p>email </p>
+            <p>Email </p>
             <input type="email" name="email" placeholder="<?= $fetch_profile['email']; ?>" maxlength="20"  class="box">
          </div>
          <div class="col">
             <p>senha antiga :</p>
-            <input type="password" name="old_pass" placeholder="enter your old password" maxlength="20"  class="box">
+            <input type="password" name="old_pass" placeholder="Senha Antiga" maxlength="20"  class="box">
             <p>nova senha :</p>
-            <input type="password" name="new_pass" placeholder="enter your new password" maxlength="20"  class="box">
+            <input type="password" name="new_pass" placeholder="Senha Nova" maxlength="20"  class="box">
             <p>confirmar senha:</p>
-            <input type="password" name="cpass" placeholder="confirm your new password" maxlength="20"  class="box">
+            <input type="password" name="cpass" placeholder="Confirmar Senha nova" maxlength="20"  class="box">
          </div>
       </div>
-      <p>atualiar foto :</p>
+      <p>Atualizar Foto :</p>
       <input type="file" name="image" accept="image/*"  class="box">
-      <input type="submit" name="submit" value="update now" class="btn">
+      <input type="submit" name="submit" value="Atualizar" class="btn">
    </form>
 
 </section>

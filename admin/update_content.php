@@ -112,7 +112,7 @@ if(isset($_POST['update'])){
    
 <section class="video-form">
 
-   <h1 class="heading">atualizar conteudo</h1>
+   <h1 class="heading">Atualizar Projeto</h1>
 
    <?php
       $select_videos = $conn->prepare("SELECT * FROM `content` WHERE id = ? AND tutor_id = ?");
@@ -136,9 +136,9 @@ if(isset($_POST['update'])){
       <input type="text" name="title" maxlength="100" required placeholder="titulo do projeto" class="box" value="<?= $fecth_videos['title']; ?>">
       <p>Atualizar descriçao<span>*</span></p>
       <textarea name="description" class="box" required placeholder="Escreva a descrição" maxlength="1000" cols="30" rows="10"><?= $fecth_videos['description']; ?></textarea>
-      <p>Atualizar playlist</p>
+      <p>Atualizar Curso</p>
       <select name="playlist" class="box">
-         <option value="<?= $fecth_videos['playlist_id']; ?>" selected>--selecionar playlist</option>
+         <option value="<?= $fecth_videos['playlist_id']; ?>" selected>--selecionar Curso</option>
          <?php
          $select_playlists = $conn->prepare("SELECT * FROM `playlist` WHERE tutor_id = ?");
          $select_playlists->execute([$tutor_id]);
@@ -151,7 +151,7 @@ if(isset($_POST['update'])){
          ?>
          <?php
          }else{
-            echo '<option value="" disabled>nenhuma playlist criada!</option>';
+            echo '<option value="" disabled>nenhum Curso criada!</option>';
          }
          ?>
       </select>
@@ -165,14 +165,14 @@ if(isset($_POST['update'])){
       <input type="file" name="new_zip" accept=".zip" class="box">
       <input type="submit" value="Atualizar projeto" name="update" class="btn">
       <div class="flex-btn">
-         <a href="view_content.php?get_id=<?= $video_id; ?>" class="option-btn">ver conteudo</a>
+         <a href="view_content.php?get_id=<?= $video_id; ?>" class="option-btn">ver Projeto</a>
          <input type="submit" value="Deletar projeto" name="delete_video" class="delete-btn">
       </div>
    </form>
    <?php
          }
       }else{
-         echo '<p class="empty">video nao encontrado! <a href="add_content.php" class="btn" style="margin-top: 1.5rem;">adicionar videos</a></p>';
+         echo '<p class="empty">Projeto nao encontrado! <a href="add_content.php" class="btn" style="margin-top: 1.5rem;">adicionar Projetos</a></p>';
       }
    ?>
 

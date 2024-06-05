@@ -45,7 +45,7 @@ if(isset($message)){
          <?php
             }else{
          ?>
-         <h3>Porfavor faça login ou registre-se</h3>
+         <h3>Por favor faça login ou registre-se</h3>
           <div class="flex-btn">
             <a href="login.php" class="option-btn">login</a>
             <a href="register.php" class="option-btn">registro</a>

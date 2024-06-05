@@ -60,20 +60,20 @@ $total_comments = $select_comments->rowCount();
 
       <div class="box">
          <h3><?= $total_contents; ?></h3>
-         <p>Conteudos</p>
-         <a href="add_content.php" class="btn">novo conteudo</a>
+         <p>Projetos</p>
+         <a href="add_content.php" class="btn">novo Projeto</a>
       </div>
 
       <div class="box">
          <h3><?= $total_playlists; ?></h3>
-         <p>total playlists</p>
-         <a href="add_playlist.php" class="btn">nova playlist</a>
+         <p>Total de Cursos</p>
+         <a href="add_playlist.php" class="btn">Novo Curso</a>
       </div>
 
       <div class="box">
          <h3><?= $total_likes; ?></h3>
-         <p>total likes</p>
-         <a href="contents.php" class="btn">ver conteudos</a>
+         <p>Total likes</p>
+         <a href="contents.php" class="btn">ver Likes</a>
       </div>
 
       <div class="box">

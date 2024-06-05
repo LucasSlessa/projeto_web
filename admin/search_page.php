@@ -29,9 +29,9 @@ if(isset($_POST['delete_video'])){
       $delete_comments->execute([$delete_id]);
       $delete_content = $conn->prepare("DELETE FROM `content` WHERE id = ?");
       $delete_content->execute([$delete_id]);
-      $message[] = 'video deleted!';
+      $message[] = 'video deletado!';
    }else{
-      $message[] = 'video already deleted!';
+      $message[] = 'video ja Deletado!';
    }
 
 }
@@ -55,9 +55,9 @@ if(isset($_POST['delete_playlist'])){
    $delete_bookmark->execute([$delete_id]);
    $delete_playlist = $conn->prepare("DELETE FROM `playlist` WHERE id = ?");
    $delete_playlist->execute([$delete_id]);
-   $message[] = 'playlist deleted!';
+   $message[] = 'Curso deletado!';
    }else{
-      $message[] = 'playlist already deleted!';
+      $message[] = 'Curso ja deletado!';
    }
 }
 
@@ -109,15 +109,15 @@ if(isset($_POST['delete_playlist'])){
             <a href="update_content.php?get_id=<?= $video_id; ?>" class="option-btn">update</a>
             <input type="submit" value="delete" class="delete-btn" onclick="return confirm('deletar este video?');" name="delete_video">
          </form>
-         <a href="view_content.php?get_id=<?= $video_id; ?>" class="btn">view content</a>
+         <a href="view_content.php?get_id=<?= $video_id; ?>" class="btn">Ver Projetos</a>
       </div>
    <?php
          }
       }else{
-         echo '<p class="empty">nada encontrado!</p>';
+         echo '<p class="empty">Nada encontrado!</p>';
       }
    }else{
-      echo '<p class="empty">porfavor pesquise algo!!</p>';
+      echo '<p class="empty">Pesquise algo!!</p>';
    }
    ?>
 
@@ -127,7 +127,7 @@ if(isset($_POST['delete_playlist'])){
 
 <section class="playlists">
 
-   <h1 class="heading">playlists</h1>
+   <h1 class="heading">Cursos</h1>
 
    <div class="box-container">
    
@@ -159,14 +159,14 @@ if(isset($_POST['delete_playlist'])){
             <a href="update_playlist.php?get_id=<?= $playlist_id; ?>" class="option-btn">atualizar</a>
             <input type="submit" value="delete_playlist" class="delete-btn" onclick="return confirm('delete this playlist?');" name="delete">
          </form>
-         <a href="view_playlist.php?get_id=<?= $playlist_id; ?>" class="btn">ver playlists</a>
+         <a href="view_playlist.php?get_id=<?= $playlist_id; ?>" class="btn">ver Conteudos</a>
       </div>
       <?php
          } 
       }else{
-         echo '<p class="empty">nenhuma playlist encontrada</p>';
+         echo '<p class="empty">Nenhum Curso encontrado</p>';
       }}else{
-         echo '<p class="empty">porfavor pesquise algo!</p>';
+         echo '<p class="empty">Pesquise algo!</p>';
       }
       ?>
 

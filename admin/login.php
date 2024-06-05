@@ -16,7 +16,7 @@ if(isset($_POST['submit'])){
      header('location:dashboard.php');
      exit; // Adicionando exit para garantir que o script seja interrompido após o redirecionamento
    }else{
-      $message[] = 'incorrect email or password!';
+      $message[] = 'Email ou senha incorretos!';
    }
 
 }
@@ -60,12 +60,12 @@ if(isset($message)){
 <section class="form-container">
 
    <form action="" method="post" enctype="multipart/form-data" class="login">
-      <h3>welcome back!</h3>
-      <p>your email <span>*</span></p>
+      <h3>Bem vindo!</h3>
+      <p>Seu email <span>*</span></p>
       <input type="email" name="email" placeholder="enter your email" maxlength="50" required class="box">
-      <p>your password <span>*</span></p>
+      <p>Seu password <span>*</span></p>
       <input type="password" name="pass" placeholder="enter your password" maxlength="20" required class="box">
-      <p class="link">don't have an account? <a href="register.php">register new</a></p>
+      <p class="link">Nao possui uma conta! <a href="register.php">Registrar Agora</a></p>
       <input type="submit" name="submit" value="login now" class="btn">
    </form>
 

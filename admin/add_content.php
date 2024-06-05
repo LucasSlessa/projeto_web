@@ -75,16 +75,16 @@ if(isset($_POST['submit'])){
       <p>status <span>*</span></p>
       <select name="status" class="box" required>
          <option value="" selected disabled>-- Selecione o Status</option>
-         <option value="active">ativo</option>
-         <option value="deactive">inativo</option>
+         <option value="ativo">ativo</option>
+         <option value="desativo">inativo</option>
       </select>
       <p>titulo do Projeto <span>*</span></p>
       <input type="text" name="title" maxlength="100" required placeholder="titulo do projeto" class="box">
       <p>Descrição do Projeto<span>*</span></p>
       <textarea name="description" class="box" required placeholder="escreva uma descrição" maxlength="1000" cols="30" rows="10"></textarea>
-      <p>playlist <span>*</span></p>
+      <p>Curso<span>*</span></p>
       <select name="playlist" class="box" required>
-         <option value="" disabled selected>--selecione uma playlist</option>
+         <option value="" disabled selected>--selecione um Curso</option>
          <?php
          $select_playlists = $conn->prepare("SELECT * FROM `playlist` WHERE tutor_id = ?");
          $select_playlists->execute([$tutor_id]);
@@ -101,11 +101,11 @@ if(isset($_POST['submit'])){
          }
          ?>
       </select>
-      <p>thumbnail<span>*</span></p>
+      <p>Thumbnail<span>*</span></p>
       <input type="file" name="thumb" accept="image/*" required class="box">
-      <p>video <span>*</span></p>
+      <p>Video <span>*</span></p>
       <input type="file" name="video" accept="video/*" required class="box">
-      <p>Project Zip <span>*</span></p>
+      <p>Zip do Projeto <span>*</span></p>
       <input type="file" name="project_zip" accept=".zip" required class="box">
       <input type="submit" value="enviar projeto" name="submit" class="btn">
    </form>

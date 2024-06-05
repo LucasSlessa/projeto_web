@@ -56,7 +56,7 @@ if(isset($_POST['submit'])){
       }
    } 
 
-   $message[] = 'playlist updated!';  
+   $message[] = 'Curso atualizado!';  
 
 }
 
@@ -83,7 +83,7 @@ if(isset($_POST['delete'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Atualizar Playlist</title>
+   <title>Atualizar Cursos</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -98,7 +98,7 @@ if(isset($_POST['delete'])){
    
 <section class="playlist-form">
 
-   <h1 class="heading">atualizar playlist</h1>
+   <h1 class="heading">Atualizar Curso</h1>
 
    <?php
          $select_playlist = $conn->prepare("SELECT * FROM `playlist` WHERE id = ?");
@@ -112,26 +112,26 @@ if(isset($_POST['delete'])){
       ?>
    <form action="" method="post" enctype="multipart/form-data">
       <input type="hidden" name="old_image" value="<?= $fetch_playlist['thumb']; ?>">
-      <p>status da playlist<span>*</span></p>
+      <p>Status do Curso<span>*</span></p>
       <select name="status" class="box" required>
          <option value="<?= $fetch_playlist['status']; ?>" selected><?= $fetch_playlist['status']; ?></option>
-         <option value="active">ativa</option>
-         <option value="deactive">inativa</option>
+         <option value="ATIVO">ativo</option>
+         <option value="INATIVO">inativo</option>
       </select>
-      <p>titulo da playlist<span>*</span></p>
+      <p>titulo do Curso<span>*</span></p>
       <input type="text" name="title" maxlength="100" required placeholder="titulo da playlist" value="<?= $fetch_playlist['title']; ?>" class="box">
-      <p>descriçao da playlist <span>*</span></p>
+      <p>descriçao do Curso <span>*</span></p>
       <textarea name="descrição" class="box" required placeholder="escreva uma descrição" maxlength="1000" cols="30" rows="10"><?= $fetch_playlist['description']; ?></textarea>
-      <p>thumbnail da Playlist <span>*</span></p>
+      <p>thumbnail do Curso <span>*</span></p>
       <div class="thumb">
          <span><?= $total_videos; ?></span>
          <img src="../uploaded_files/<?= $fetch_playlist['thumb']; ?>" alt="">
       </div>
       <input type="file" name="image" accept="image/*" class="box">
-      <input type="submit" value="Atualizar playlist" name="submit" class="btn">
+      <input type="submit" value="Atualizar Curso" name="submit" class="btn">
       <div class="flex-btn">
-         <input type="submit" value="delete" class="delete-btn" onclick="return confirm('excluir esta playlist?');" name="delete">
-         <a href="view_playlist.php?get_id=<?= $playlist_id; ?>" class="option-btn">vier playlists</a>
+         <input type="submit" value="Deletar" class="delete-btn" onclick="return confirm('excluir este Curso?');" name="delete">
+         <a href="view_playlist.php?get_id=<?= $playlist_id; ?>" class="option-btn">ver Curso</a>
       </div>
    </form>
    <?php

@@ -29,9 +29,9 @@ if(isset($_POST['delete_video'])){
       $delete_comments->execute([$delete_id]);
       $delete_content = $conn->prepare("DELETE FROM `content` WHERE id = ?");
       $delete_content->execute([$delete_id]);
-      $message[] = 'video deleted!';
+      $message[] = 'video deletado!';
    }else{
-      $message[] = 'video already deleted!';
+      $message[] = 'video ja deletado!';
    }
 
 }
@@ -59,7 +59,7 @@ if(isset($_POST['delete_video'])){
    
 <section class="contents">
 
-   <h1 class="heading">Seus Projetos</h1>
+   <h1 class="heading">Projetos</h1>
 
    <div class="box-container">
 
@@ -87,7 +87,7 @@ if(isset($_POST['delete_video'])){
             <a href="update_content.php?get_id=<?= $video_id; ?>" class="option-btn">atualizar</a>
             <input type="submit" value="delete" class="delete-btn" onclick="return confirm('deletar este video?');" name="delete_video">
          </form>
-         <a href="view_content.php?get_id=<?= $video_id; ?>" class="btn">Visualizar conteudos</a>
+         <a href="view_content.php?get_id=<?= $video_id; ?>" class="btn">Visualizar Projeto</a>
       </div>
    <?php
          }

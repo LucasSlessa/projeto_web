@@ -33,7 +33,7 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Profile</title>
+   <title>Perfil</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -60,23 +60,23 @@
       <div class="flex">
          <div class="box">
             <span><?= $total_playlists; ?></span>
-            <p>total de playlists</p>
-            <a href="playlists.php" class="btn">visualizar playlists</a>
+            <p>Total de Cursos</p>
+            <a href="playlists.php" class="btn">visualizar Cursos</a>
          </div>
          <div class="box">
             <span><?= $total_contents; ?></span>
-            <p>total de videos</p>
-            <a href="contents.php" class="btn">ver conteudos</a>
+            <p>Total de Projetos</p>
+            <a href="contents.php" class="btn">Ver Projetoss</a>
          </div>
          <div class="box">
             <span><?= $total_likes; ?></span>
-            <p>total de likes</p>
-            <a href="contents.php" class="btn">ver conteudos</a>
+            <p>Total de likes</p>
+            <a href="contents.php" class="btn">Ver Likes</a>
          </div>
          <div class="box">
             <span><?= $total_comments; ?></span>
-            <p>comentarios</p>
-            <a href="comments.php" class="btn">ver comentarios</a>
+            <p>Comentarios</p>
+            <a href="comments.php" class="btn">Ver comentarios</a>
          </div>
       </div>
    </div>
