@@ -131,17 +131,18 @@ if(isset($_POST['submit'])){
             <p>profissão</p>
             <select name="profession" class="box">
                <option value="" selected><?= $fetch_profile['profession']; ?></option>
-               <option value="developer">Desenvolvimento</option>
-               <option value="desginer">Arquitetrua</option>
-               <option value="musician">musica</option>
-               <option value="biologist">biologia</option>
-               <option value="teacher">Engenharia</option>
-               <option value="engineer">Advocacia</option>
-               <option value="lawyer">Astrofisica</option>
-               <option value="accountant">Economia</option>
-               <option value="doctor">Veterinaria</option>
-               <option value="journalist">jornalista</option>
-               <option value="photographer">Cinema</option>
+               <option value="desenvolvimento">Desenvolvimento</option>
+               <option value="arquitetura">Arquitetura</option>
+               <option value="musica">Música</option>
+               <option value="biologia">Biologia</option>
+               <option value="engenharia">Engenharia</option>
+               <option value="advocacia">Advocacia</option>
+               <option value="astrofisica">Astrofísica</option>
+               <option value="economia">Economia</option>
+               <option value="veterinaria">Veterinária</option>
+               <option value="jornalista">Jornalista</option>
+               <option value="cinema">Cinema</option>
+
             </select>
             <p>Email </p>
             <input type="email" name="email" placeholder="<?= $fetch_profile['email']; ?>" maxlength="20"  class="box">
