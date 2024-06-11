@@ -115,13 +115,13 @@ if(isset($_POST['delete'])){
       <p>Status do Curso<span>*</span></p>
       <select name="status" class="box" required>
          <option value="<?= $fetch_playlist['status']; ?>" selected><?= $fetch_playlist['status']; ?></option>
-         <option value="ATIVO">ativo</option>
-         <option value="INATIVO">inativo</option>
+         <option value="active">ativo</option>
+         <option value="inative">inativo</option>
       </select>
       <p>titulo do Curso<span>*</span></p>
-      <input type="text" name="title" maxlength="100" required placeholder="titulo da playlist" value="<?= $fetch_playlist['title']; ?>" class="box">
+      <input type="text" name="title" maxlength="100" required placeholder="titulo do Curso" value="<?= $fetch_playlist['title']; ?>" class="box">
       <p>descriçao do Curso <span>*</span></p>
-      <textarea name="descrição" class="box" required placeholder="escreva uma descrição" maxlength="1000" cols="30" rows="10"><?= $fetch_playlist['description']; ?></textarea>
+      <textarea name="description" class="box" required placeholder="escreva uma descrição" maxlength="1000" cols="30" rows="10"><?= $fetch_playlist['description']; ?></textarea>
       <p>thumbnail do Curso <span>*</span></p>
       <div class="thumb">
          <span><?= $total_videos; ?></span>

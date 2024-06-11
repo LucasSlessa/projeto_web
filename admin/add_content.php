@@ -75,15 +75,15 @@ if(isset($_POST['submit'])){
       <p>status <span>*</span></p>
       <select name="status" class="box" required>
          <option value="" selected disabled>-- Selecione o Status</option>
-         <option value="ativo">ativo</option>
-         <option value="desativo">inativo</option>
+         <option value="active">ativo</option>
+         <option value="inative">inativo</option>
       </select>
       <p>titulo do Projeto <span>*</span></p>
       <input type="text" name="title" maxlength="100" required placeholder="titulo do projeto" class="box">
       <p>Descrição do Projeto<span>*</span></p>
-      <textarea name="description" class="box" required placeholder="escreva uma descrição" maxlength="1000" cols="30" rows="10"></textarea>
+      <textarea name="description" class="box" required placeholder="Descrição do projeto" maxlength="10000" cols="30" rows="10"></textarea>
       <p>Resumo do Projeto<span>*</span></p>
-      <textarea name="description" class="box" required placeholder="Resumo do projeto" maxlength="1000" cols="30" rows="10"></textarea>
+      <textarea name="description" class="box" required placeholder="Resumo do Projeto" maxlength="1000" cols="30" rows="10"></textarea>
       <p>Tipo do Projeto <span>*</span></p>
             <select name="tipo" class="box" required>
                <option value="" disabled selected>-- selecione o tipo</option>

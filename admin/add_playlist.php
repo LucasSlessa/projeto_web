@@ -59,8 +59,8 @@ if(isset($_POST['submit'])){
       <p>status do curso<span>*</span></p>
       <select name="status" class="box" required>
          <option value="" selected disabled>-- selecione o status</option>
-         <option value="ativo">ativo</option>
-         <option value="inativo">inativo</option>
+         <option value="active">ativo</option>
+         <option value="inative">inativo</option>
       </select>
       <p>titulo do curso <span>*</span></p>
       <input type="text" name="title" maxlength="100" required placeholder="titulo do curso" class="box">

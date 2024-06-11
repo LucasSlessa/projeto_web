@@ -66,7 +66,7 @@
          <div class="box">
             <span><?= $total_contents; ?></span>
             <p>Total de Projetos</p>
-            <a href="contents.php" class="btn">Ver Projetoss</a>
+            <a href="contents.php" class="btn">Ver Projetos</a>
          </div>
          <div class="box">
             <span><?= $total_likes; ?></span>
