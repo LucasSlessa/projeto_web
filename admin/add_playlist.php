@@ -26,7 +26,7 @@ if(isset($_POST['submit'])){
 
    move_uploaded_file($_FILES['image']['tmp_name'], $image_folder);
 
-   $message[] = 'New playlist created!';  
+   $message[] = 'NOVO CURSO CRIADO!';  
 }
 
 ?>

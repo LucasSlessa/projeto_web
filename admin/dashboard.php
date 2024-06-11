@@ -71,17 +71,16 @@ $total_comments = $select_comments->rowCount();
       </div>
 
       <div class="box">
-         <h3><?= $total_likes; ?></h3>
-         <p>Total likes</p>
-         <a href="contents.php" class="btn">ver Likes</a>
-      </div>
-
-      <div class="box">
          <h3><?= $total_comments; ?></h3>
          <p>Comentarios</p>
          <a href="comments.php" class="btn">ver comentarios</a>
       </div>
 
+      <div class="box">
+         <h3><?= $total_likes; ?></h3>
+         <p>Total likes</p>
+
+      </div>
       
       </div>
 

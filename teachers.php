@@ -82,7 +82,7 @@ if(isset($_COOKIE['user_id'])){
          <p>total de comentarios : <span><?= $total_comments ?></span></p>
          <form action="tutor_profile.php" method="post">
             <input type="hidden" name="tutor_email" value="<?= $fetch_tutor['email']; ?>">
-            <input type="submit" value="view profile" name="tutor_fetch" class="inline-btn">
+            <input type="submit" value="ver perfil" name="tutor_fetch" class="inline-btn">
          </form>
       </div>
       <?php

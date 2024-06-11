@@ -69,14 +69,13 @@
             <a href="contents.php" class="btn">Ver Projetos</a>
          </div>
          <div class="box">
-            <span><?= $total_likes; ?></span>
-            <p>Total de likes</p>
-            <a href="contents.php" class="btn">Ver Likes</a>
-         </div>
-         <div class="box">
             <span><?= $total_comments; ?></span>
             <p>Comentarios</p>
             <a href="comments.php" class="btn">Ver comentarios</a>
+         </div>
+         <div class="box">
+            <span><?= $total_likes; ?></span>
+            <p>Total de likes</p>
          </div>
       </div>
    </div>

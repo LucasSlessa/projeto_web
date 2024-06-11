@@ -74,9 +74,9 @@ if(isset($_POST['tutor_fetch'])){
       </div>
       <div class="flex">
          <p>total de Cursos : <span><?= $total_playlists; ?></span></p>
-         <p>total de videos : <span><?= $total_contents; ?></span></p>
+         <p>total de Projetos : <span><?= $total_contents; ?></span></p>
          <p>total de likes : <span><?= $total_likes; ?></span></p>
-         <p>total de comentarios : <span><?= $total_comments; ?></span></p>
+         <p>comentarios : <span><?= $total_comments; ?></span></p>
       </div>
    </div>
 
