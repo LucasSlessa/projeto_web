@@ -83,7 +83,7 @@ if(isset($_POST['submit'])){
       <p>Descrição do Projeto<span>*</span></p>
       <textarea name="description2" class="box" required placeholder="escreva uma descrição" maxlength="1000" cols="30" rows="10"></textarea>
       <p>Resumo do Projeto<span>*</span></p>
-      <textarea name="description" class="box" required placeholder="Resumo do projeto" maxlength="10000" cols="50" rows="50"></textarea>
+      <textarea name="description" class="box" required placeholder="Resumo do projeto" maxlength="10000" cols="30" rows="10"></textarea>
       <p>Tipo do Projeto <span>*</span></p>
             <select name="tipo" class="box" required>
                <option value="" disabled selected>-- selecione o tipo</option>
